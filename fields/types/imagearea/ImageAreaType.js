@@ -19,7 +19,7 @@ function imageArea (list, path, options) {
 	}
 	imageArea.super_.call(this, list, path, options);
 }
-imageArea.properName = 'Number';
+imageArea.properName = 'ImageArea';
 util.inherits(imageArea, FieldType);
 
 imageArea.prototype.validateInput = function (data, callback) {

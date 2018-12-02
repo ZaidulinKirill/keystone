@@ -28,4 +28,4 @@ var ImageAreaColumn = React.createClass({
 	},
 });
 
-module.exports = NumberColumn;
+module.exports = ImageAreaColumn;

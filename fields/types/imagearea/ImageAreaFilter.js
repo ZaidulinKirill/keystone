@@ -22,7 +22,7 @@ function getDefaultValue () {
 	};
 }
 
-var NumberFilter = React.createClass({
+var ImageAreaFilter = React.createClass({
 	statics: {
 		getDefaultValue: getDefaultValue,
 	},
@@ -142,4 +142,4 @@ var NumberFilter = React.createClass({
 
 });
 
-module.exports = NumberFilter;
+module.exports = ImageAreaFilter;

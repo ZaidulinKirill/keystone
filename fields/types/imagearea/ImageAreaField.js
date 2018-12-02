@@ -5,7 +5,7 @@ import { FormInput } from '../../../admin/client/App/elemental';
 module.exports = Field.create({
 	displayName: 'ImageAreaField',
 	statics: {
-		type: 'Number',
+		type: 'ImageArea',
 	},
 	valueChanged (event) {
 		var newValue = event.target.value;
