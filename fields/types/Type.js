@@ -30,6 +30,7 @@ var DEFAULT_OPTION_KEYS = [
 	'dependsOn',
 	'autoCleanup',
 	'thumb',
+	'param',
 ];
 
 /**

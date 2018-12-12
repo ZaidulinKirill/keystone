@@ -7,40 +7,44 @@ work out whether we're going to support deleting through the UI.
 import React, { PropTypes } from 'react';
 import Field from '../Field';
 import cloudinaryResize from '../../../admin/client/utils/cloudinaryResize';
-import { Button, FormField, FormInput, FormNote } from '../../../admin/client/App/elemental';
+import { Button, FormField, FormNote, FormInput } from '../../../admin/client/App/elemental';
 
 import ImageThumbnail from '../../components/ImageThumbnail';
 import FileChangeMessage from '../../components/FileChangeMessage';
-import HiddenFileInput from '../../components/HiddenFileInput';
-import Lightbox from 'react-images';
+import Modal from 'react-responsive-modal';
+import ReactCrop from 'react-image-crop';
 
-const SUPPORTED_TYPES = ['image/*', 'application/pdf', 'application/postscript'];
-const SUPPORTED_REGEX = new RegExp(/^image\/|application\/pdf|application\/postscript/g);
+const buildInitialState = (props) => {
+	let parts = props.value.split(',');
+	let crop = {
+		x: parts[0] ? parseFloat(parts[0]) : 0,
+		y: parts[1] ? parseFloat(parts[1]) : 0,
+		width: parts[2] ? parseFloat(parts[2]) : 0.25,
+		height: parts[3] ? parseFloat(parts[3]) : 0.25,
+		aspect: props.param.ratio,
+	};
 
-let uploadInc = 1000;
+	return {
+		removeExisting: false,
+		isCropChanged: false,
+		crop: crop,
+		cropValue: `${crop.x},${crop.y},${crop.width},${crop.height}`,
+	};
+};
 
-const buildInitialState = (props) => ({
-	removeExisting: false,
-	uploadFieldPath: `CloudinaryImage-${props.path}-${++uploadInc}`,
-	userSelectedFile: null,
-});
 
 module.exports = Field.create({
 	propTypes: {
 		collapse: PropTypes.bool,
 		label: PropTypes.string,
 		note: PropTypes.string,
+		param: PropTypes.string,
 		path: PropTypes.string.isRequired,
 		value: PropTypes.shape({
-			format: PropTypes.string,
-			height: PropTypes.number,
-			public_id: PropTypes.string,
-			resource_type: PropTypes.string,
-			secure_url: PropTypes.string,
-			signature: PropTypes.string,
-			url: PropTypes.string,
-			version: PropTypes.number,
+			x: PropTypes.number,
+			y: PropTypes.number,
 			width: PropTypes.number,
+			height: PropTypes.number,
 		}),
 	},
 	displayName: 'ImageAreaField',
@@ -49,53 +53,31 @@ module.exports = Field.create({
 		getDefaultValue: () => ({}),
 	},
 	getInitialState () {
+		console.log(this.props);
 		return buildInitialState(this.props);
 	},
 	componentWillReceiveProps (nextProps) {
 		// console.log('ImageAreaField nextProps:', nextProps);
 	},
 	componentWillUpdate (nextProps) {
-		// Reset the action state when the value changes
-		// TODO: We should add a check for a new item ID in the store
-		if (this.props.value.public_id !== nextProps.value.public_id) {
-			this.setState({
-				removeExisting: false,
-				userSelectedFile: null,
-			});
-		}
+
 	},
 
 	// ==============================
 	// HELPERS
 	// ==============================
 
-	hasLocal () {
-		return !!this.state.userSelectedFile;
-	},
 	hasExisting () {
-		return !!(this.props.value && this.props.value.url);
-	},
-	hasImage () {
-		return this.hasExisting() || this.hasLocal();
-	},
-	getFilename () {
-		const { format, height, public_id, width } = this.props.value;
-
-		return this.state.userSelectedFile
-			? this.state.userSelectedFile.name
-			: `${public_id}.${format} (${width}×${height})`;
+		return !!(this.props.param.imagePath && this.props.values[this.props.param.imagePath]);
 	},
 	getImageSource (height = 90) {
-		// TODO: This lets really wide images break the layout
+		let image = this.props.values[this.props.param.imagePath];
 		let src;
-		if (this.hasLocal()) {
-			src = this.state.dataUri;
-		} else if (this.hasExisting()) {
-			src = cloudinaryResize(this.props.value.public_id, {
+		if (image && this.hasExisting()) {
+			src = cloudinaryResize(image.public_id, {
 				crop: 'fit',
 				height: height,
 				format: 'jpg',
-				secure: this.props.secure,
 			});
 		}
 
@@ -106,57 +88,41 @@ module.exports = Field.create({
 	// METHODS
 	// ==============================
 
-	triggerFileBrowser () {
-		this.refs.fileInput.clickDomNode();
-	},
-	handleFileChange (event) {
-		const userSelectedFile = event.target.files[0];
-
-		this.setState({ userSelectedFile });
-	},
-
 	// Toggle the lightbox
 	openLightbox (event) {
 		event.preventDefault();
+
+		let { param } = this.props;
+
 		this.setState({
 			lightboxIsVisible: true,
+			crop: {
+				aspect: param.ratio,
+			},
 		});
 	},
 	closeLightbox () {
+		let { crop } = this.state;
+
+		this.props.onChange({
+			path: this.props.path,
+			value: {
+				x: Number.parseFloat(crop.x),
+				y: Number.parseFloat(crop.y),
+				width: Number.parseFloat(crop.width),
+				height: Number.parseFloat(crop.height),
+			},
+		});
+
 		this.setState({
 			lightboxIsVisible: false,
+			isCropChanged: true,
+			cropValue: `${this.state.crop.x},${this.state.crop.y},${this.state.crop.width},${this.state.crop.height}`,
 		});
 	},
 
-	// Handle image selection in file browser
-	handleImageChange (e) {
-		if (!window.FileReader) {
-			return alert('File reader not supported by browser.');
-		}
-
-		var reader = new FileReader();
-		var file = e.target.files[0];
-		if (!file) return;
-
-		if (!file.type.match(SUPPORTED_REGEX)) {
-			return alert('Unsupported file type. Supported formats are: GIF, PNG, JPG, BMP, ICO, PDF, TIFF, EPS, PSD, SVG');
-		}
-
-		reader.readAsDataURL(file);
-
-		reader.onloadstart = () => {
-			this.setState({
-				loading: true,
-			});
-		};
-		reader.onloadend = (upload) => {
-			this.setState({
-				dataUri: upload.target.result,
-				loading: false,
-				userSelectedFile: file,
-			});
-			this.props.onChange({ file: file });
-		};
+	onCropChange (crop) {
+		this.setState({ crop, isCropChanged: true });
 	},
 
 	// If we have a local file added then remove it and reset the file field.
@@ -180,37 +146,24 @@ module.exports = Field.create({
 	// ==============================
 
 	renderLightbox () {
-		const { value } = this.props;
-
-		if (!value || !value.public_id) return;
+		if (!this.hasExisting()) return;
 
 		return (
-			<Lightbox
-				currentImage={0}
-				images={[{ src: this.getImageSource(600) }]}
-				isOpen={this.state.lightboxIsVisible}
-				onClose={this.closeLightbox}
-				showImageCount={false}
-			/>
+			<Modal classNames={{ modal: 'image-area' }} open={this.state.lightboxIsVisible} onClose={this.closeLightbox} center>
+				<ReactCrop
+					src={this.getImageSource(600)}
+					crop={this.state.crop}
+					onChange={this.onCropChange}
+          />
+			</Modal>
 		);
 	},
 	renderImagePreview () {
-		const { value } = this.props;
-
-		// render icon feedback for intent
-		let mask;
-		if (this.hasLocal()) mask = 'upload';
-		else if (this.state.removeExisting) mask = 'remove';
-		else if (this.state.loading) mask = 'loading';
-
-		const shouldOpenLightbox = value.format !== 'pdf';
-
 		return (
 			<ImageThumbnail
 				component="a"
 				href={this.getImageSource(600)}
-				onClick={shouldOpenLightbox && this.openLightbox}
-				mask={mask}
+				onClick={this.openLightbox}
 				target="__blank"
 				style={{ float: 'left', marginRight: '1em' }}
 			>
@@ -218,93 +171,12 @@ module.exports = Field.create({
 			</ImageThumbnail>
 		);
 	},
-	renderFileNameAndOptionalMessage (showChangeMessage = false) {
-		return (
-			<div>
-				{this.hasImage() ? (
-					<FileChangeMessage>
-						{this.getFilename()}
-					</FileChangeMessage>
-				) : null}
-				{showChangeMessage && this.renderChangeMessage()}
-			</div>
-		);
-	},
 	renderChangeMessage () {
-		if (this.state.userSelectedFile) {
+		if (this.state.isCropChanged) {
 			return (
 				<FileChangeMessage color="success">
 					Save to Upload
 				</FileChangeMessage>
-			);
-		} else if (this.state.removeExisting) {
-			return (
-				<FileChangeMessage color="danger">
-					Save to Remove
-				</FileChangeMessage>
-			);
-		} else {
-			return null;
-		}
-	},
-
-	// Output [cancel/remove/undo] button
-	renderClearButton () {
-		const clearText = this.hasLocal() ? 'Cancel' : 'Remove Image';
-
-		return this.state.removeExisting ? (
-			<Button variant="link" onClick={this.undoRemove}>
-				Undo Remove
-			</Button>
-		) : (
-			<Button variant="link" color="cancel" onClick={this.handleRemove}>
-				{clearText}
-			</Button>
-		);
-	},
-
-	renderImageToolbar () {
-		return (
-			<div key={this.props.path + '_toolbar'} className="image-toolbar">
-				<Button onClick={this.triggerFileBrowser}>
-					{this.hasImage() ? 'Change' : 'Upload'} Image
-				</Button>
-				{this.hasImage() ? this.renderClearButton() : null}
-			</div>
-		);
-	},
-
-	renderFileInput () {
-		if (!this.shouldRenderField()) return null;
-
-		return (
-			<HiddenFileInput
-				accept={SUPPORTED_TYPES.join()}
-				ref="fileInput"
-				name={this.state.uploadFieldPath}
-				onChange={this.handleImageChange}
-			/>
-		);
-	},
-
-	// This renders a hidden input that holds the payload data for how the field
-	// should be updated. It should be upload:{filename}, undefined, or 'remove'
-	renderActionInput () {
-		if (!this.shouldRenderField()) return null;
-
-		if (this.state.userSelectedFile || this.state.removeExisting) {
-			let value = '';
-			if (this.state.userSelectedFile) {
-				value = `upload:${this.state.uploadFieldPath}`;
-			} else if (this.state.removeExisting && this.props.autoCleanup) {
-				value = 'delete';
-			}
-			return (
-				<input
-					name={this.getInputName(this.props.path)}
-					type="hidden"
-					value={value}
-				/>
 			);
 		} else {
 			return null;
@@ -315,24 +187,26 @@ module.exports = Field.create({
 		const { label, note, path } = this.props;
 
 		const imageContainer = (
-			<div style={this.hasImage() ? { marginBottom: '1em' } : null}>
-				{this.hasImage() && this.renderImagePreview()}
-				{this.hasImage() && this.renderFileNameAndOptionalMessage(this.shouldRenderField())}
+			<div style={this.hasExisting() ? { marginBottom: '1em' } : null}>
+				{this.hasExisting() && this.renderImagePreview()}
 			</div>
 		);
 
-		const toolbar = this.shouldRenderField()
-			? this.renderImageToolbar()
-			: <FormInput noedit />;
-
 		return (
 			<FormField label={label} className="field-type-cloudinaryimage" htmlFor={path}>
+				<FormInput {...{
+					autoComplete: 'off',
+					name: this.getInputName(this.props.path),
+					onChange: this.valueChanged,
+					ref: 'focusTarget',
+					type: 'hidden',
+					value: `${this.state.cropValue}`,
+				}} />
+
 				{imageContainer}
-				{toolbar}
+				{this.renderChangeMessage()}
 				{!!note && <FormNote note={note} />}
 				{this.renderLightbox()}
-				{this.renderFileInput()}
-				{this.renderActionInput()}
 			</FormField>
 		);
 	},

@@ -94,6 +94,7 @@ var EditForm = React.createClass({
 		const values = assign({}, this.state.values);
 
 		values[event.path] = event.value;
+		console.log(values);
 		this.setState({ values });
 	},
 
@@ -137,6 +138,8 @@ var EditForm = React.createClass({
 		});
 
 		const formData = new FormData(editForm);
+
+		console.log(formData);
 
 		$(editForm).find("input[type='file']").each(function () {
 			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', false); }

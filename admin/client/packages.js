@@ -29,6 +29,8 @@ module.exports = [
 	'react-dnd',
 	'react-dom',
 	'react-images',
+	'react-responsive-modal',
+	'react-image-crop',
 	'react-redux',
 	'react-router-redux',
 	'react-router',
