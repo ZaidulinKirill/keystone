@@ -11,7 +11,6 @@ module.exports = {
 		if (req.files && req.files.file) {
 			var formData = new FormData();
 
-			console.log(req.files.file);
 			formData.append('file', fs.createReadStream(req.files.file.path), {
 				filename: req.files.file.originalname,
 			});
