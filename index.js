@@ -85,6 +85,11 @@ var Keystone = function () {
 		this.set('cloudinary config', true);
 	}
 
+	if (process.env.ECLAINARY_TOKEN) {
+		// process.env.CLOUDINARY_URL is processed by the eclainary package when this is set
+		this.set('eclainary config', true);
+	}
+
 	// init mongoose
 	this.set('mongoose', require('mongoose'));
 	this.mongoose.Promise = require('es6-promise').Promise;
