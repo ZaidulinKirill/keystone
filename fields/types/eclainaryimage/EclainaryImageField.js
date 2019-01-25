@@ -81,7 +81,7 @@ module.exports = Field.create({
 		if (this.hasLocal()) {
 			src = this.state.dataUri;
 		} else if (this.hasExisting()) {
-			src = eclainaryTransform(this.props.value.url, `h_${height},c_fit`, 'jpg');
+			src = eclainaryTransform(this.props.value.url, `h_${height},c_fit`);
 		}
 
 		return src;

@@ -44,8 +44,8 @@ module.exports = Field.create({
 		const thumbnails = props.value ? props.value.map((img, index) => {
 			return this.getThumbnail({
 				value: img,
-				imageSourceSmall: eclainaryTransform(img.url, 'h_90,c_fit', 'jpg'),
-				imageSourceLarge: eclainaryTransform(img.url, 'w_900,h_600,c_fit', 'jpg'),
+				imageSourceSmall: eclainaryTransform(img.url, 'h_90,c_fit'),
+				imageSourceLarge: eclainaryTransform(img.url, 'w_900,h_600,c_fit'),
 			}, index);
 		}) : [];
 		return { thumbnails, uploadFieldPath };
@@ -208,7 +208,7 @@ module.exports = Field.create({
 		if (!value || !value.length) return;
 
 		const images = value.map(image => ({
-			src: eclainaryTransform(image.url, 'w_900,h_600,c_fit', 'jpg'),
+			src: eclainaryTransform(image.url, 'w_900,h_600,c_fit'),
 		}));
 
 		return (
