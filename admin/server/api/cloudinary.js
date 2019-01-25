@@ -18,13 +18,13 @@ module.exports = {
 
 			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
-				.then(function (res) {
-					return res.json();
+				.then(function (response) {
+					return response.json();
 				})
-				.then(function (res) {
+				.then(function (response) {
 					var sendResult = function () {
 						res.send({
-							image: res.url,
+							image: response.url,
 						});
 					};
 
