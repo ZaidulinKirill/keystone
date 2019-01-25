@@ -9,6 +9,10 @@ var sanitize = require('sanitize-filename');
 var util = require('util');
 var utils = require('keystone-utils');
 var eclainaryTransform = require('../../../lib/eclainaryTransform');
+const fs = require('fs');
+const FormData = require('form-data');
+const fetch = require('node-fetch');
+
 
 /*
 var ECLAINARY_FIELDS = ['public_id', 'format', 'url', 'width', 'height'];
@@ -360,15 +364,23 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename = sanitize(filename);
 				uploadOptions.public_id = trimSupportedFileExtensions(filename);
 			}
-			console.log(uploadedFile.path);
-			// eclainary.uploader.upload(uploadedFile.path, function (result) {
-			// 	if (result.error) {
-			// 		return callback(result.error);
-			// 	} else {
-			// 		item.set(field.path, result);
-			// 		return callback();
-			// 	}
-			// }, uploadOptions);
+
+			var formData = new FormData();
+
+			formData.append('file',
+				fs.createReadStream('C:\\Users\\Kirill\\AppData\\Local\\Temp\\20b576e59bba0fef7ef55d23bfeeecb6.jpg'));
+
+			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
+			{ method: 'POST', body: formData })
+				.then(function (res) {
+					console.log(res.json());
+					console.log(typeof res.json());
+					item.set(field.path, res.json());
+					return callback();
+				})
+				.catch(function (err) {
+					return callback(err);
+				});
 		});
 
 		return;
