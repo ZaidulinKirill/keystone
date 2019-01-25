@@ -368,7 +368,7 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 			var formData = new FormData();
 
 			formData.append('file',
-				fs.createReadStream('C:\\Users\\Kirill\\AppData\\Local\\Temp\\20b576e59bba0fef7ef55d23bfeeecb6.jpg'));
+				fs.createReadStream(uploadedFile.path));
 
 			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })

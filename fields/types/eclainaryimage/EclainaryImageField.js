@@ -311,7 +311,7 @@ module.exports = Field.create({
 			: <FormInput noedit />;
 
 		return (
-			<FormField label={label} className="field-type-cloudinaryimage" htmlFor={path}>
+			<FormField label={label} className="field-type-eclainaryimage" htmlFor={path}>
 				{imageContainer}
 				{toolbar}
 				{!!note && <FormNote note={note} />}
