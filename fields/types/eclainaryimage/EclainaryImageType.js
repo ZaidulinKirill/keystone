@@ -371,7 +371,7 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename: uploadedFile.originalname,
 			});
 
-			confirm.log(formData);
+			console.log(formData);
 			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
 				.then(function (res) {
