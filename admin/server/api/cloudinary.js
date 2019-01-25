@@ -24,7 +24,9 @@ module.exports = {
 				.then(function (response) {
 					var sendResult = function () {
 						res.send({
-							image: response.url,
+							image: {
+								url: response.url,
+							},
 						});
 					};
 
