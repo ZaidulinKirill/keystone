@@ -367,6 +367,7 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 
 			var formData = new FormData();
 
+			console.log(uploadedFile.path);
 			formData.append('file',
 				fs.createReadStream(uploadedFile.path));
 
@@ -376,10 +377,12 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 					return res.json();
 				})
 				.then(function (res) {
+					console.error(res);
 					item.set(field.path, res);
 					return callback();
 				})
 				.catch(function (err) {
+					console.error(err);
 					return callback(err);
 				});
 		});
