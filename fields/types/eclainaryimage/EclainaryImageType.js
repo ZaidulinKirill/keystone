@@ -371,14 +371,12 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename: uploadedFile.originalname,
 			});
 
-			console.log(formData);
 			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
 				.then(function (res) {
 					return res.json();
 				})
 				.then(function (res) {
-					console.error(res);
 					item.set(field.path, res);
 					return callback();
 				})
