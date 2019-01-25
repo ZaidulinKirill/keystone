@@ -29,6 +29,8 @@ const Types = {
 	Textarea: require('../types/textarea/test/explorer'),
 	TextArray: require('../types/textarray/test/explorer'),
 	Url: require('../types/url/test/explorer'),
+	//EclainaryImage: require('../types/eclainaryimage/test/explorer'),
+	//EclainaryImages: require('../types/cloudinaryimages/test/explorer'),
 };
 
 function generateNavSections (arr) {
