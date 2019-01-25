@@ -1,35 +1,41 @@
+const fs = require('fs');
+const FormData = require('form-data');
+const fetch = require('node-fetch');
+
 /*
 TODO: Needs Review and Spec
 */
 
 module.exports = {
 	upload: function (req, res) {
-		var cloudinary = require('cloudinary');
-		var keystone = req.keystone;
-
 		if (req.files && req.files.file) {
-			var options = {};
+			var formData = new FormData();
 
-			if (keystone.get('wysiwyg cloudinary images filenameAsPublicID')) {
-				options.public_id = req.files.file.originalname.substring(0, req.files.file.originalname.lastIndexOf('.'));
-			}
+			console.log(req.files.file);
+			formData.append('file', fs.createReadStream(req.files.file.path), {
+				filename: req.files.file.originalname,
+			});
 
-			cloudinary.uploader.upload(req.files.file.path, function (result) {
-				var sendResult = function () {
-					if (result.error) {
-						res.send({ error: { message: result.error.message } });
-					} else {
-						res.send({ image: { url: (keystone.get('cloudinary secure') === true) ? result.secure_url : result.url } });
-					}
-				};
+			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
+			{ method: 'POST', body: formData })
+				.then(function (res) {
+					return res.json();
+				})
+				.then(function (res) {
+					var sendResult = function () {
+						res.send({
+							image: res.url,
+						});
+					};
 
-				// TinyMCE upload plugin uses the iframe transport technique
-				// so the response type must be text/html
-				res.format({
-					html: sendResult,
-					json: sendResult,
+					res.format({
+						html: sendResult,
+						json: sendResult,
+					});
+				})
+				.catch(function (err) {
+					res.send({ error: { message: err } });
 				});
-			}, options);
 		} else {
 			res.json({ error: { message: 'No image selected' } });
 		}
