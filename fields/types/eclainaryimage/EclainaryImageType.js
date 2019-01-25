@@ -376,7 +376,6 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 					return res.json();
 				})
 				.then(function (res) {
-					console.log(res);
 					item.set(field.path, res);
 					return callback();
 				})
