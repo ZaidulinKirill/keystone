@@ -54,6 +54,8 @@ module.exports = Field.create({
 	},
 	getInitialState () {
 		console.log(this.props);
+		console.log(this.value);
+		console.log(buildInitialState(this.props));
 		return buildInitialState(this.props);
 	},
 	componentWillReceiveProps (nextProps) {
