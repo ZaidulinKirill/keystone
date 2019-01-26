@@ -53,7 +53,6 @@ module.exports = Field.create({
 		getDefaultValue: () => ({}),
 	},
 	getInitialState () {
-		console.log(buildInitialState(this.props));
 		return buildInitialState(this.props);
 	},
 	componentWillReceiveProps (nextProps) {
@@ -92,9 +91,7 @@ module.exports = Field.create({
 
 		this.setState({
 			lightboxIsVisible: true,
-			crop: {
-				aspect: param.ratio,
-			},
+			crop: this.state.crop,
 		});
 	},
 	closeLightbox () {
