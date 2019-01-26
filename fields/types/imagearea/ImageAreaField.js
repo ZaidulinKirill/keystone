@@ -53,8 +53,6 @@ module.exports = Field.create({
 		getDefaultValue: () => ({}),
 	},
 	getInitialState () {
-		console.log(this.props);
-		console.log(this.value);
 		console.log(buildInitialState(this.props));
 		return buildInitialState(this.props);
 	},
@@ -147,12 +145,11 @@ module.exports = Field.create({
 		if (!this.hasExisting()) return;
 
 		return (
-			<Modal classNames={{ modal: 'image-area' }}
-				open={this.state.lightboxIsVisible} onClose={this.closeLightbox} center>
+			<Modal classNames={{ modal: 'image-area' }} open={this.state.lightboxIsVisible} onClose={this.closeLightbox} center>
 				<ReactCrop
 					src={this.getImageSource(600)}
-					// crop={this.state.crop}
-					// onChange={this.onCropChange}
+					crop={this.state.crop}
+					onChange={this.onCropChange}
           />
 			</Modal>
 		);
