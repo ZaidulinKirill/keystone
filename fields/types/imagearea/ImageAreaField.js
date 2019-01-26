@@ -6,8 +6,8 @@ work out whether we're going to support deleting through the UI.
 
 import React, { PropTypes } from 'react';
 import Field from '../Field';
-import cloudinaryResize from '../../../admin/client/utils/cloudinaryResize';
-import { Button, FormField, FormNote, FormInput } from '../../../admin/client/App/elemental';
+import eclainaryTransform from '../../../lib/eclainaryTransform';
+import { FormField, FormNote, FormInput } from '../../../admin/client/App/elemental';
 
 import ImageThumbnail from '../../components/ImageThumbnail';
 import FileChangeMessage from '../../components/FileChangeMessage';
@@ -74,11 +74,7 @@ module.exports = Field.create({
 		let image = this.props.values[this.props.param.imagePath];
 		let src;
 		if (image && this.hasExisting()) {
-			src = cloudinaryResize(image.public_id, {
-				crop: 'fit',
-				height: height,
-				format: 'jpg',
-			});
+			src = eclainaryTransform(image.url, 'c_fit,h_' + height);
 		}
 
 		return src;

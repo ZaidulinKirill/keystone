@@ -1,5 +1,5 @@
 import React from 'react';
-import CloudinaryImageSummary from '../../components/columns/CloudinaryImageSummary';
+import EclainaryImageSummary from '../../components/columns/EclainaryImageSummary';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
@@ -15,7 +15,7 @@ var ImageAreaColumn = React.createClass({
 
 		return (
 			<ItemsTableValue field={this.props.col.type}>
-				<CloudinaryImageSummary label="dimensions" image={value} secure={this.props.col.field.secure} />
+				<EclainaryImageSummary label="dimensions" image={value} />
 			</ItemsTableValue>
 		);
 
