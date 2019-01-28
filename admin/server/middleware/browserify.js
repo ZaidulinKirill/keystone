@@ -124,11 +124,17 @@ module.exports = function (opts) {
 	}
 
 	function serve (req, res) {
+		console.log(src);
 		if (src) {
 			return send(req, res);
 		}
 
+		console.log(outputFilename);
 		fs.readFile(outputFilename, function (err, data) {
+			if (err) {
+				return res.status(500).send(err);
+			}
+			console.log('success');
 			if (data) {
 				updateBundle(data);
 				if (devMode) {
