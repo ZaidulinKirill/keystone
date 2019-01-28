@@ -131,8 +131,8 @@ module.exports = function (opts) {
 
 		console.log(outputFilename);
 		fs.readFile(outputFilename, function (err, data) {
-			if (err) {
-				return res.status(500).send(err);
+			if (err && err.length) {
+				return res.status(500).send(JSON.stringify(err));
 			}
 			console.log('success');
 			if (data) {
