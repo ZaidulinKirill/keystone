@@ -25,22 +25,22 @@
 //  * @extends Field
 //  * @api public
 //  */
-// function imageArea (list, path, options) {
+// function imagearea (list, path, options) {
 // 	this._underscoreMethods = ['format'];
 // 	this._fixedSize = 'full';
 // 	this._properties = ['select', 'selectPrefix', 'autoCleanup'];
 
 // 	options = assign({}, DEFAULT_OPTIONS, options);
 
-// 	imageArea.super_.call(this, list, path, options);
+// 	imagearea.super_.call(this, list, path, options);
 // }
-// imageArea.properName = 'ImageArea';
-// util.inherits(imageArea, FieldType);
+// imagearea.properName = 'ImageArea';
+// util.inherits(imagearea, FieldType);
 
 // /**
 //  * Registers the field on the List's Mongoose Schema.
 //  */
-// imageArea.prototype.addToSchema = function (schema) {
+// imagearea.prototype.addToSchema = function (schema) {
 
 // 	var field = this;
 
@@ -87,21 +87,21 @@
 // /**
 //  * Formats the field value
 //  */
-// imageArea.prototype.format = function (item) {
+// imagearea.prototype.format = function (item) {
 // 	return item.get(this.paths.url);
 // };
 
 // /**
 //  * Gets the field's data from an Item, as used by the React components
 //  */
-// imageArea.prototype.getData = function (item) {
+// imagearea.prototype.getData = function (item) {
 // 	var value = item.get(this.path);
 // 	return typeof value === 'object' ? value : {};
 // };
 
-// imageArea.prototype._originalGetOptions = imageArea.prototype.getOptions;
+// imagearea.prototype._originalGetOptions = imagearea.prototype.getOptions;
 
-// imageArea.prototype.getOptions = function () {
+// imagearea.prototype.getOptions = function () {
 // 	this._originalGetOptions();
 // 	return this.__options;
 // };
@@ -109,7 +109,7 @@
 // /**
 //  * Detects whether the field has been modified
 //  */
-// imageArea.prototype.isModified = function (item) {
+// imagearea.prototype.isModified = function (item) {
 // 	return item.isModified(this.paths.x)
 // 	|| item.isModified(this.paths.y)
 // 	|| item.isModified(this.paths.width)
@@ -128,7 +128,7 @@
 // /**
 //  * Validates that a value for this field has been provided in a data object
 //  */
-// imageArea.prototype.validateInput = function (data, callback) {
+// imagearea.prototype.validateInput = function (data, callback) {
 // 	var value = data ? JSON.parse(data) : '';
 // //	 this.getValueFromData(data);
 // 	var result = validateInput(value);
@@ -138,7 +138,7 @@
 // /**
 //  * Validates that input has been provided
 //  */
-// imageArea.prototype.validateRequiredInput = function (item, data, callback) {
+// imagearea.prototype.validateRequiredInput = function (item, data, callback) {
 // 	// TODO: We need to also get the `files` argument, so we can check for
 // 	// uploaded files. without it, this will return false negatives so we
 // 	// can't actually validate required input at the moment.
@@ -153,7 +153,7 @@
 //  *
 //  * Deprecated
 //  */
-// imageArea.prototype.inputIsValid = function () {
+// imagearea.prototype.inputIsValid = function () {
 // 	return true;
 // };
 
@@ -162,7 +162,7 @@
 //  * TODO: It is not possible to remove an existing value and upload a new image
 //  * in the same action, this should be supported
 //  */
-// imageArea.prototype.updateItem = function (item, data, files, callback) {
+// imagearea.prototype.updateItem = function (item, data, files, callback) {
 // 	// Prepare values
 // 	var value = this.getValueFromData(data);
 
@@ -179,7 +179,7 @@
 // };
 
 // /* Export Field Type */
-// module.exports = imageArea;
+// module.exports = imagearea;
 
 
 var FieldType = require('../Type');
@@ -191,17 +191,17 @@ var utils = require('keystone-utils');
  * @extends Field
  * @api public
  */
-function imageArea (list, path, options) {
+function imagearea (list, path, options) {
 	this.options = options;
 	this._nativeType = String;
 	this._properties = ['monospace'];
 	this._underscoreMethods = ['crop'];
-	imageArea.super_.call(this, list, path, options);
+	imagearea.super_.call(this, list, path, options);
 }
-imageArea.properName = 'ImageArea';
-util.inherits(imageArea, FieldType);
+imagearea.properName = 'ImageArea';
+util.inherits(imagearea, FieldType);
 
-imageArea.prototype.validateInput = function (data, callback) {
+imagearea.prototype.validateInput = function (data, callback) {
 	var max = this.options.max;
 	var min = this.options.min;
 	var value = this.getValueFromData(data);
@@ -215,7 +215,7 @@ imageArea.prototype.validateInput = function (data, callback) {
 	utils.defer(callback, result);
 };
 
-imageArea.prototype.validateRequiredInput = function (item, data, callback) {
+imagearea.prototype.validateRequiredInput = function (item, data, callback) {
 	var value = this.getValueFromData(data);
 	var result = !!value;
 	if (value === undefined && item.get(this.path)) {
@@ -227,7 +227,7 @@ imageArea.prototype.validateRequiredInput = function (item, data, callback) {
 /**
  * Add filters to a query
  */
-imageArea.prototype.addFilterToQuery = function (filter) {
+imagearea.prototype.addFilterToQuery = function (filter) {
 	var query = {};
 	if (filter.mode === 'exactly' && !filter.value) {
 		query[this.path] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
@@ -249,9 +249,9 @@ imageArea.prototype.addFilterToQuery = function (filter) {
 /**
  * Crops the string to the specifed length.
  */
-imageArea.prototype.crop = function (item, length, append, preserveWords) {
+imagearea.prototype.crop = function (item, length, append, preserveWords) {
 	return utils.cropString(item.get(this.path), length, append, preserveWords);
 };
 
 /* Export Field Type */
-module.exports = imageArea;
+module.exports = imagearea;
