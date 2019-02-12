@@ -78,7 +78,7 @@ module.exports = Field.create({
 			}
 			else {
 				const h = parseFloat(this.state.crop.width) / parseFloat(this.state.crop.aspect);
-				src = eclainaryTransform(image.url, `cx_${parseFloat(this.state.crop.x) / 100},cy_${parseFloat(this.state.crop.y) / 100},cw_${parseFloat(this.state.crop.width) / 100},ch_${parseFloat(h) / 100}` + 'c_fit,h_' + height);
+				src = eclainaryTransform(image.url, `cx_${parseFloat(this.state.crop.x) / 100},cy_${parseFloat(this.state.crop.y) / 100},cw_${parseFloat(this.state.crop.width) / 100},ch_${parseFloat(h) / 100},` + 'h_' + height);
 			}
 		}
 
@@ -166,7 +166,7 @@ module.exports = Field.create({
 				target="__blank"
 				style={{ float: 'left', marginRight: '1em' }}
 			>
-				<img src={this.getImageSource(null, true)} style={{ height: 90 }} />
+				<img src={this.getImageSource(90, true)} style={{ height: 90 }} />
 			</ImageThumbnail>
 		);
 	},
