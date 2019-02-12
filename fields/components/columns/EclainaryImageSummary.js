@@ -1,7 +1,7 @@
 import React from 'react';
 import eclainaryTransform from '../../../lib/eclainaryTransform';
 
-const IMAGE_SIZE = 18;
+const IMAGE_SIZE = 48;
 
 const linkStyle = {
 	marginRight: 8,
