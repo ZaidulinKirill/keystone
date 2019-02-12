@@ -73,11 +73,11 @@ module.exports = Field.create({
 		let image = this.props.values[this.props.param.imagePath];
 		let src;
 		if (image && this.hasExisting()) {
-			if (!showArea || !this.state.crop){
+			if (!showArea || !this.state.crop) {
 				src = eclainaryTransform(image.url, 'c_fit,h_' + height);
 			}
 			else {
-				const height = parseFloat(this.state.crop.width) / parseFloat(this.state.crop.aspect)
+				const height = parseFloat(this.state.crop.width) / parseFloat(this.state.crop.aspect);
 				src = eclainaryTransform(image.url, `cx_${parseFloat(this.state.crop.x) / 100},cy_${parseFloat(this.state.crop.y) / 100},cw_${parseFloat(this.state.crop.width) / 100},ch_${parseFloat(this.state.crop.height) / 100}` + 'c_fit,h_' + height);
 			}
 		}
@@ -166,7 +166,7 @@ module.exports = Field.create({
 				target="__blank"
 				style={{ float: 'left', marginRight: '1em' }}
 			>
-				<img src={this.getImageSource(, true)} style={{ height: 90 }} />
+				<img src={this.getImageSource(null, true)} style={{ height: 90 }} />
 			</ImageThumbnail>
 		);
 	},
