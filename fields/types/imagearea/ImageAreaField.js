@@ -29,6 +29,12 @@ const buildInitialState = (props) => {
 		isCropChanged: false,
 		aspectRatio: props.param.ratio,
 		crop: crop,
+		dirtyCrop: {
+			x: 0,
+			y: 0,
+			width: 0.25,
+			height: 0.25,
+		},
 		cropValue: `${crop.x},${crop.y},${crop.width},${crop.height}`,
 	};
 };
@@ -103,27 +109,29 @@ module.exports = Field.create({
 		});
 	},
 	closeLightbox () {
-		let { crop } = this.state;
+		let { dirtyCrop } = this.state;
 
+		console.log(dirtyCrop);
 		this.props.onChange({
 			path: this.props.path,
 			value: {
-				x: Number.parseFloat(crop.x),
-				y: Number.parseFloat(crop.y),
-				width: Number.parseFloat(crop.width),
-				height: Number.parseFloat(crop.height),
+				x: Number.parseFloat(dirtyCrop.x),
+				y: Number.parseFloat(dirtyCrop.y),
+				width: Number.parseFloat(dirtyCrop.width),
+				height: Number.parseFloat(dirtyCrop.height),
 			},
 		});
 
 		this.setState({
 			lightboxIsVisible: false,
 			isCropChanged: true,
-			cropValue: `${this.state.crop.x},${this.state.crop.y},${this.state.crop.width},${this.state.crop.height}`,
+			crop: dirtyCrop,
+			cropValue: `${dirtyCrop.x},${dirtyCrop.y},${dirtyCrop.width},${dirtyCrop.height}`,
 		});
 	},
 
 	onCropChange (crop) {
-		this.setState({ crop, isCropChanged: true });
+		this.setState({ dirtyCrop: crop, isCropChanged: true });
 	},
 
 	// If we have a local file added then remove it and reset the file field.
