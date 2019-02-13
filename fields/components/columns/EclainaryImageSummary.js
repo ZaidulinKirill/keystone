@@ -1,7 +1,7 @@
 import React from 'react';
 import eclainaryTransform from '../../../lib/eclainaryTransform';
 
-const IMAGE_SIZE = 48;
+const IMAGE_SIZE = 80;
 
 const linkStyle = {
 	marginRight: 8,
@@ -9,14 +9,14 @@ const linkStyle = {
 const boxStyle = {
 	borderRadius: 3,
 	display: 'inline-block',
-	height: IMAGE_SIZE,
+	// height: IMAGE_SIZE,
 	overflow: 'hidden',
 	verticalAlign: 'middle',
 	width: IMAGE_SIZE,
 };
 const imageStyle = {
 	display: 'block',
-	height: IMAGE_SIZE,
+	width: IMAGE_SIZE,
 	left: '50%',
 	position: 'relative',
 
@@ -60,7 +60,7 @@ var EclainaryImageSummary = React.createClass({
 	renderImageThumbnail () {
 		if (!this.props.image) return;
 
-		const url = eclainaryTransform(this.props.image.url, `h_${IMAGE_SIZE},w_${IMAGE_SIZE}c_fill`);
+		const url = eclainaryTransform(this.props.image.url, `h_${IMAGE_SIZE},w_${IMAGE_SIZE},c_inside`);
 		return <img src={url} style={imageStyle} className="img-load" />;
 	},
 	render () {

@@ -313,7 +313,6 @@ eclainaryimages.prototype.updateItem = function (item, data, files, callback) {
 
 			var formData = new FormData();
 
-			console.log(value);
 			formData.append('file', fs.createReadStream(value.path), {
 				filename: value.originalname,
 			});
