@@ -1,7 +1,7 @@
 import React from 'react';
 import eclainaryTransform from '../../../lib/eclainaryTransform';
 
-const IMAGE_SIZE = 80;
+const IMAGE_SIZE = 100;
 
 const linkStyle = {
 	marginRight: 8,
@@ -9,14 +9,15 @@ const linkStyle = {
 const boxStyle = {
 	borderRadius: 3,
 	display: 'inline-block',
-	// height: IMAGE_SIZE,
+	height: IMAGE_SIZE,
 	overflow: 'hidden',
 	verticalAlign: 'middle',
 	width: IMAGE_SIZE,
 };
 const imageStyle = {
 	display: 'block',
-	width: IMAGE_SIZE,
+	maxWidth: IMAGE_SIZE,
+	maxHeight: IMAGE_SIZE,
 	left: '50%',
 	position: 'relative',
 
