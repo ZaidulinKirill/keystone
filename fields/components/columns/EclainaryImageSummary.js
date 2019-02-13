@@ -9,7 +9,7 @@ const linkStyle = {
 const boxStyle = {
 	borderRadius: 3,
 	display: 'inline-block',
-	height: IMAGE_SIZE,
+	// height: IMAGE_SIZE,
 	overflow: 'hidden',
 	verticalAlign: 'middle',
 	width: IMAGE_SIZE,
