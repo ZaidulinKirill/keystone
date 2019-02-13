@@ -80,13 +80,13 @@ module.exports = Field.create({
 		let image = this.props.values[this.props.param.imagePath];
 		let src;
 		if (image && this.hasExisting()) {
-			if (!showArea || !this.state.crop) {
+			if (!showArea || !this.state.dirtyCrop) {
 				src = eclainaryTransform(image.url, 'c_fit,h_' + height);
 			}
 			else {
-				const h = parseFloat(this.state.crop.width) / parseFloat(this.state.aspectRatio);
+				const h = parseFloat(this.state.dirtyCrop.width) / parseFloat(this.state.aspectRatio);
 				src = eclainaryTransform(image.url,
-					`cx_${(parseFloat(this.state.crop.x) / 100).toFixed(5)},cy_${(parseFloat(this.state.crop.y) / 100).toFixed(5)},cw_${(parseFloat(this.state.crop.width) / 100).toFixed(5)},ch_${(parseFloat(h) / 100).toFixed(5)},` + 'h_' + height);
+					`cx_${(parseFloat(this.state.dirtyCrop.x) / 100).toFixed(5)},cy_${(parseFloat(this.state.dirtyCrop.y) / 100).toFixed(5)},cw_${(parseFloat(this.state.dirtyCrop.width) / 100).toFixed(5)},ch_${(parseFloat(h) / 100).toFixed(5)},` + 'h_' + height);
 			}
 		}
 
@@ -109,29 +109,29 @@ module.exports = Field.create({
 		});
 	},
 	closeLightbox () {
-		let { dirtyCrop } = this.state;
+		let { crop } = this.state;
 
-		console.log(dirtyCrop);
+		console.log(crop);
 		this.props.onChange({
 			path: this.props.path,
 			value: {
-				x: Number.parseFloat(dirtyCrop.x),
-				y: Number.parseFloat(dirtyCrop.y),
-				width: Number.parseFloat(dirtyCrop.width),
-				height: Number.parseFloat(dirtyCrop.height),
+				x: Number.parseFloat(crop.x),
+				y: Number.parseFloat(crop.y),
+				width: Number.parseFloat(crop.width),
+				height: Number.parseFloat(crop.height),
 			},
 		});
 
 		this.setState({
 			lightboxIsVisible: false,
 			isCropChanged: true,
-			crop: dirtyCrop,
-			cropValue: `${dirtyCrop.x},${dirtyCrop.y},${dirtyCrop.width},${dirtyCrop.height}`,
+			dirtyCrop: crop,
+			cropValue: `${crop.x},${crop.y},${crop.width},${crop.height}`,
 		});
 	},
 
 	onCropChange (crop) {
-		this.setState({ dirtyCrop: crop, isCropChanged: true });
+		this.setState({ crop, isCropChanged: true });
 	},
 
 	// If we have a local file added then remove it and reset the file field.
