@@ -17,16 +17,17 @@ import ReactCrop from 'react-image-crop';
 const buildInitialState = (props) => {
 	let parts = props.value.split(',');
 	let crop = {
-		x: parts[0] ? parseFloat(parts[0]).toFixed(5) : 0,
-		y: parts[1] ? parseFloat(parts[1]).toFixed(5) : 0,
-		width: parts[2] ? parseFloat(parts[2]).toFixed(5) : 0.25,
-		height: parts[3] ? parseFloat(parts[3]).toFixed(5) : 0.25,
+		x: parts[0] ? parseFloat(parts[0]) : 0,
+		y: parts[1] ? parseFloat(parts[1]) : 0,
+		width: parts[2] ? parseFloat(parts[2]) : 0.25,
+		height: parts[3] ? parseFloat(parts[3]) : 0.25,
 		aspect: props.param.ratio,
 	};
 
 	return {
 		removeExisting: false,
 		isCropChanged: false,
+		aspectRatio: props.param.ratio,
 		crop: crop,
 		cropValue: `${crop.x},${crop.y},${crop.width},${crop.height}`,
 	};
@@ -77,8 +78,9 @@ module.exports = Field.create({
 				src = eclainaryTransform(image.url, 'c_fit,h_' + height);
 			}
 			else {
-				const h = parseFloat(this.state.crop.width) / parseFloat(this.state.crop.aspect);
-				src = eclainaryTransform(image.url, `cx_${parseFloat(this.state.crop.x) / 100},cy_${parseFloat(this.state.crop.y) / 100},cw_${parseFloat(this.state.crop.width) / 100},ch_${parseFloat(h) / 100},` + 'h_' + height);
+				const h = parseFloat(this.state.crop.width) / parseFloat(this.state.aspectRatio);
+				src = eclainaryTransform(image.url,
+					`cx_${(parseFloat(this.state.crop.x) / 100).toFixed(5)},cy_${(parseFloat(this.state.crop.y) / 100).toFixed(5)},cw_${(parseFloat(this.state.crop.width) / 100).toFixed(5)},ch_${(parseFloat(h) / 100).toFixed(5)},` + 'h_' + height);
 			}
 		}
 
@@ -106,10 +108,10 @@ module.exports = Field.create({
 		this.props.onChange({
 			path: this.props.path,
 			value: {
-				x: Number.parseFloat(crop.x).toFixed(5),
-				y: Number.parseFloat(crop.y).toFixed(5),
-				width: Number.parseFloat(crop.width).toFixed(5),
-				height: Number.parseFloat(crop.height).toFixed(5),
+				x: Number.parseFloat(crop.x),
+				y: Number.parseFloat(crop.y),
+				width: Number.parseFloat(crop.width),
+				height: Number.parseFloat(crop.height),
 			},
 		});
 
@@ -121,12 +123,7 @@ module.exports = Field.create({
 	},
 
 	onCropChange (crop) {
-		this.setState({ crop: {
-			x: Number.parseFloat(crop.x).toFixed(5),
-			y: Number.parseFloat(crop.y).toFixed(5),
-			width: Number.parseFloat(crop.width).toFixed(5),
-			height: Number.parseFloat(crop.height).toFixed(5),
-		}, isCropChanged: true });
+		this.setState({ crop, isCropChanged: true });
 	},
 
 	// If we have a local file added then remove it and reset the file field.
