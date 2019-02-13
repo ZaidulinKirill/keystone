@@ -29,12 +29,7 @@ const buildInitialState = (props) => {
 		isCropChanged: false,
 		aspectRatio: props.param.ratio,
 		crop: crop,
-		dirtyCrop: {
-			x: 0,
-			y: 0,
-			width: 0.25,
-			height: 0.25,
-		},
+		dirtyCrop: crop,
 		cropValue: `${crop.x},${crop.y},${crop.width},${crop.height}`,
 	};
 };
