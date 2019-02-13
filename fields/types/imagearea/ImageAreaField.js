@@ -17,10 +17,10 @@ import ReactCrop from 'react-image-crop';
 const buildInitialState = (props) => {
 	let parts = props.value.split(',');
 	let crop = {
-		x: parts[0] ? parseFloat(parts[0]) : 0,
-		y: parts[1] ? parseFloat(parts[1]) : 0,
-		width: parts[2] ? parseFloat(parts[2]) : 0.25,
-		height: parts[3] ? parseFloat(parts[3]) : 0.25,
+		x: parts[0] ? parseFloat(parts[0]).toFixed(5) : 0,
+		y: parts[1] ? parseFloat(parts[1]).toFixed(5) : 0,
+		width: parts[2] ? parseFloat(parts[2]).toFixed(5) : 0.25,
+		height: parts[3] ? parseFloat(parts[3]).toFixed(5) : 0.25,
 		aspect: props.param.ratio,
 	};
 
@@ -106,10 +106,10 @@ module.exports = Field.create({
 		this.props.onChange({
 			path: this.props.path,
 			value: {
-				x: Number.parseFloat(crop.x),
-				y: Number.parseFloat(crop.y),
-				width: Number.parseFloat(crop.width),
-				height: Number.parseFloat(crop.height),
+				x: Number.parseFloat(crop.x).toFixed(5),
+				y: Number.parseFloat(crop.y).toFixed(5),
+				width: Number.parseFloat(crop.width).toFixed(5),
+				height: Number.parseFloat(crop.height).toFixed(5),
 			},
 		});
 
@@ -121,7 +121,12 @@ module.exports = Field.create({
 	},
 
 	onCropChange (crop) {
-		this.setState({ crop, isCropChanged: true });
+		this.setState({ crop: {
+			x: Number.parseFloat(crop.x).toFixed(5),
+			y: Number.parseFloat(crop.y).toFixed(5),
+			width: Number.parseFloat(crop.width).toFixed(5),
+			height: Number.parseFloat(crop.height).toFixed(5),
+		}, isCropChanged: true });
 	},
 
 	// If we have a local file added then remove it and reset the file field.
