@@ -317,7 +317,7 @@ eclainaryimages.prototype.updateItem = function (item, data, files, callback) {
 				filename: value.originalname,
 			});
 
-			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
+			fetch(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
 				.then(function (res) {
 					return res.json();

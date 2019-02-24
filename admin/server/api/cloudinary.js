@@ -15,7 +15,7 @@ module.exports = {
 				filename: req.files.file.originalname,
 			});
 
-			fetch(`http://eclainary.peppyhost.site/images/${process.env.ECLAINARY_TOKEN}`,
+			fetch(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
 				.then(function (response) {
 					return response.json();
