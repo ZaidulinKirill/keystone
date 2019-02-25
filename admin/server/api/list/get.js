@@ -19,6 +19,7 @@ module.exports = function (req, res) {
 		}
 	}
 	var filters = req.query.filters;
+	console.log('Filters', filters);
 	if (filters && typeof filters === 'string') {
 		try { filters = JSON.parse(req.query.filters); }
 		catch (e) { } // eslint-disable-line no-empty
