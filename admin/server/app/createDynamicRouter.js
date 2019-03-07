@@ -66,11 +66,11 @@ module.exports = function createDynamicRouter (keystone) {
 
 	// #4: Cloudinary and S3 specific APIs
 	// TODO: poor separation of concerns; should / could this happen elsewhere?
-	if (keystone.get('cloudinary config')) {
-		router.get('/api/cloudinary/get', require('../api/cloudinary').get);
-		router.get('/api/cloudinary/autocomplete', require('../api/cloudinary').autocomplete);
-		router.post('/api/cloudinary/upload', require('../api/cloudinary').upload);
-	}
+	// if (keystone.get('cloudinary config')) {
+	router.get('/api/cloudinary/get', require('../api/cloudinary').get);
+	router.get('/api/cloudinary/autocomplete', require('../api/cloudinary').autocomplete);
+	router.post('/api/cloudinary/upload', require('../api/cloudinary').upload);
+	// }
 	if (keystone.get('s3 config')) {
 		router.post('/api/s3/upload', require('../api/s3').upload);
 	}
