@@ -88,7 +88,7 @@ const SignupForm = ({
 						/>
 					</FormField>
 					<Button disabled={isAnimating} color="primary" type="submit">
-					Register
+					Register (Регистрация)
 				</Button>
 				</Form>
 			</div>
