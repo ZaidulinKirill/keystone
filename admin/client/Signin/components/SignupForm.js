@@ -5,6 +5,7 @@
 import React, { PropTypes } from 'react';
 import { Button, Form, FormField, FormInput } from '../../App/elemental';
 import Brand from '../Brand';
+import TinyMCE from 'react-tinymce';
 
 const SignupForm = ({
 	firstName,
@@ -61,19 +62,30 @@ const SignupForm = ({
 					/>
 					</FormField>
 					<FormField label="Biography (биография)" htmlFor="biography">
-						<FormInput
+						<TinyMCE
+							autoFocus
+							content={biography}
+							config={{
+								plugins: 'autolink link image lists print preview',
+								toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
+							}}
+							onChange={handleInputChange}
+						/>
+						{/* <FormInput
 							autoFocus
 							type="text"
 							name="biography"
 							onChange={handleInputChange}
 							value={biography}
-					/>
+					/> */}
 					</FormField>
 					<FormField label="comment (комментарий)" htmlFor="comment">
 						<FormInput
 							autoFocus
 							type="text"
 							name="comment"
+							multiline
+							numberOfLines={8}
 							onChange={handleInputChange}
 							value={comment}
 					/>

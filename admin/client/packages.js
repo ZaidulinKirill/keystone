@@ -35,6 +35,7 @@ module.exports = [
 	'react-router-redux',
 	'react-router',
 	'react-select',
+	'react-tinymce',
 	'react',
 	'redux-saga',
 	'redux-thunk',

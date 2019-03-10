@@ -18,7 +18,7 @@ var SigninView = React.createClass({
 		return {
 			firstName: '',
 			lastName: '',
-			biography: '',
+			biography: '<p>Please enter your biography here (пожалуйста, введите свою биографию здесь)</p>',
 			email: '',
 			comment: '',
 			password: '',
