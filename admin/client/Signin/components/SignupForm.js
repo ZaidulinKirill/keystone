@@ -28,7 +28,7 @@ const SignupForm = ({
 			/>
 			<div className="">
 				<Form onSubmit={handleSubmit} noValidate>
-					<FormField label="First name (имя)" htmlFor="firstName">
+					<FormField label="First name (Имя)" htmlFor="firstName">
 						<FormInput
 							autoFocus
 							type="text"
@@ -37,7 +37,7 @@ const SignupForm = ({
 							value={firstName}
 					/>
 					</FormField>
-					<FormField label="Second name (фамилия)" htmlFor="secondName">
+					<FormField label="Second name (Фамилия)" htmlFor="secondName">
 						<FormInput
 							autoFocus
 							type="text"
@@ -46,7 +46,7 @@ const SignupForm = ({
 							value={secondName}
 					/>
 					</FormField>
-					<FormField label="Email (почта)" htmlFor="email">
+					<FormField label="Email (Почта)" htmlFor="email">
 						<FormInput
 							autoFocus
 							type="email"
@@ -55,7 +55,7 @@ const SignupForm = ({
 							value={email}
 					/>
 					</FormField>
-					<FormField label="Password" htmlFor="password">
+					<FormField label="Password (Пароль)" htmlFor="password">
 						<FormInput
 							type="password"
 							name="password"
@@ -63,7 +63,7 @@ const SignupForm = ({
 							value={password}
 					/>
 					</FormField>
-					<FormField label="comment (комментарий)" htmlFor="comment">
+					<FormField label="Comment (Комментарий)" htmlFor="comment">
 						<FormInput
 							autoFocus
 							type="text"
@@ -75,7 +75,7 @@ const SignupForm = ({
 							value={comment}
 					/>
 					</FormField>
-					<FormField label="Biography (биография)" htmlFor="biography">
+					<FormField label="Biography (Биография)" htmlFor="biography">
 						<TinyMCE
 							autoFocus
 							content={biography}
