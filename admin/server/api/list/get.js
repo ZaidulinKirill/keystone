@@ -19,15 +19,12 @@ module.exports = function (req, res) {
 		}
 	}
 	var filters = req.query.filters;
-	console.log('Filters', filters);
 	if (filters && typeof filters === 'string') {
 		try { filters = JSON.parse(req.query.filters); }
 		catch (e) { } // eslint-disable-line no-empty
 	}
-	console.log('Filter type', typeof filters);
 	if (typeof filters === 'object') {
 		assign(where, req.list.addFiltersToQuery(filters));
-		console.log('Where', where);
 	}
 	if (req.query.search) {
 		assign(where, req.list.addSearchToQuery(req.query.search));

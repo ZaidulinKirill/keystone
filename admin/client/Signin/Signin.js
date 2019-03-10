@@ -11,11 +11,16 @@ import Alert from './components/Alert';
 import Brand from './components/Brand';
 import UserInfo from './components/UserInfo';
 import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 
 var SigninView = React.createClass({
 	getInitialState () {
 		return {
+			firstName: '',
+			lastName: '',
+			biography: '',
 			email: '',
+			comment: '',
 			password: '',
 			isAnimating: false,
 			isInvalid: false,
@@ -36,6 +41,37 @@ var SigninView = React.createClass({
 		this.setState(newState);
 	},
 	handleSubmit (e) {
+		e.preventDefault();
+		// If either password or mail are missing, show an error
+		if (!this.state.email || !this.state.password) {
+			return this.displayError('Please enter an email address and password to sign in.');
+		}
+
+		xhr({
+			url: `${Keystone.adminPath}/api/session/signin`,
+			method: 'post',
+			json: {
+				email: this.state.email,
+				password: this.state.password,
+			},
+			headers: assign({}, Keystone.csrf.header),
+		}, (err, resp, body) => {
+			if (err || body && body.error) {
+				return body.error === 'invalid csrf'
+					? this.displayError('Something went wrong; please refresh your browser and try again.')
+					: this.displayError('The email and password you entered are not valid.');
+			} else {
+				// Redirect to where we came from or to the default admin path
+				if (Keystone.redirect) {
+					top.location.href = Keystone.redirect;
+				} else {
+					top.location.href = this.props.from ? this.props.from : Keystone.adminPath;
+				}
+			}
+		});
+	},
+	handleSignupSubmit (e) {
+		console.log('Signup');
 		e.preventDefault();
 		// If either password or mail are missing, show an error
 		if (!this.state.email || !this.state.password) {
@@ -93,44 +129,82 @@ var SigninView = React.createClass({
 		const boxClassname = classnames('auth-box', {
 			'auth-box--has-errors': this.state.isAnimating,
 		});
-		return (
-			<div className="auth-wrapper">
-				<Alert
-					isInvalid={this.state.isInvalid}
-					signedOut={this.state.signedOut}
-					invalidMessage={this.state.invalidMessage}
-				/>
-				<div className={boxClassname}>
-					<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
-					<div className="auth-box__inner">
-						<Brand
-							logo={this.props.logo}
-							brand={this.props.brand}
-						/>
-						{this.props.user ? (
-							<UserInfo
-								adminPath={this.props.from ? this.props.from : Keystone.adminPath}
-								signoutPath={`${Keystone.adminPath}/signout`}
-								userCanAccessKeystone={this.props.userCanAccessKeystone}
-								userName={this.props.user.name}
+
+		console.log(this.props);
+		if (this.props.reqister !== 'true') {
+			return (
+				<div className="auth-wrapper">
+					<Alert
+						isInvalid={this.state.isInvalid}
+						signedOut={this.state.signedOut}
+						invalidMessage={this.state.invalidMessage}
+					/>
+					<div className={boxClassname}>
+						<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
+						<div className="auth-box__inner">
+							<Brand
+								logo={this.props.logo}
+								brand={this.props.brand}
 							/>
-						) : (
-							<LoginForm
-								email={this.state.email}
-								handleInputChange={this.handleInputChange}
-								handleSubmit={this.handleSubmit}
-								isAnimating={this.state.isAnimating}
-								password={this.state.password}
-							/>
-						)}
+							{this.props.user ? (
+								<UserInfo
+									adminPath={this.props.from ? this.props.from : Keystone.adminPath}
+									signoutPath={`${Keystone.adminPath}/signout`}
+									userCanAccessKeystone={this.props.userCanAccessKeystone}
+									userName={this.props.user.name}
+								/>
+							) : (
+								<LoginForm
+									email={this.state.email}
+									handleInputChange={this.handleInputChange}
+									handleSubmit={this.handleSubmit}
+									isAnimating={this.state.isAnimating}
+									password={this.state.password}
+								/>
+							)}
+						</div>
+					</div>
+					<div className="auth-footer">
+						<span>Powered by </span>
+						<a href="http://keystonejs.com" target="_blank" title="The Node.js CMS and web application platform (new window)">KeystoneJS</a>
 					</div>
 				</div>
-				<div className="auth-footer">
-					<span>Powered by </span>
-					<a href="http://keystonejs.com" target="_blank" title="The Node.js CMS and web application platform (new window)">KeystoneJS</a>
+			);
+		} else {
+			return (
+				<div className="auth-wrapper">
+					<Alert
+						isInvalid={this.state.isInvalid}
+						signedOut={this.state.signedOut}
+						invalidMessage={this.state.invalidMessage}
+					/>
+					<div className={boxClassname}>
+						<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
+						<div className="auth-box__inner">
+							<Brand
+								logo={this.props.logo}
+								brand={this.props.brand}
+							/>
+							<SignupForm
+								firstName={this.state.firstName}
+								lastName={this.state.lastName}
+								email={this.state.email}
+								biography={this.state.biography}
+								comment={this.state.comment}
+								handleInputChange={this.handleInputChange}
+								handleSubmit={this.handleSignupSubmit}
+								isAnimating={this.state.isAnimating}
+								password={this.state.password}
+								/>
+						</div>
+					</div>
+					<div className="auth-footer">
+						<span>Powered by </span>
+						<a href="http://keystonejs.com" target="_blank" title="The Node.js CMS and web application platform (new window)">KeystoneJS</a>
+					</div>
 				</div>
-			</div>
-		);
+			);
+		}
 	},
 });
 
