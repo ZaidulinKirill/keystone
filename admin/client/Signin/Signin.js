@@ -130,8 +130,10 @@ var SigninView = React.createClass({
 			'auth-box--has-errors': this.state.isAnimating,
 		});
 
+
 		console.log(this.props);
-		if (this.props.reqister !== 'true') {
+		console.log(window.location.search);
+		if (!window.location.search || !window.location.search.includes('register=true')) {
 			return (
 				<div className="auth-wrapper">
 					<Alert
@@ -180,23 +182,17 @@ var SigninView = React.createClass({
 					/>
 					<div className={boxClassname}>
 						<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
-						<div className="auth-box__inner">
-							<Brand
-								logo={this.props.logo}
-								brand={this.props.brand}
-							/>
-							<SignupForm
-								firstName={this.state.firstName}
-								lastName={this.state.lastName}
-								email={this.state.email}
-								biography={this.state.biography}
-								comment={this.state.comment}
-								handleInputChange={this.handleInputChange}
-								handleSubmit={this.handleSignupSubmit}
-								isAnimating={this.state.isAnimating}
-								password={this.state.password}
-								/>
-						</div>
+						<SignupForm
+							firstName={this.state.firstName}
+							lastName={this.state.lastName}
+							email={this.state.email}
+							biography={this.state.biography}
+							comment={this.state.comment}
+							handleInputChange={this.handleInputChange}
+							handleSubmit={this.handleSignupSubmit}
+							isAnimating={this.state.isAnimating}
+							password={this.state.password}
+						/>
 					</div>
 					<div className="auth-footer">
 						<span>Powered by </span>
