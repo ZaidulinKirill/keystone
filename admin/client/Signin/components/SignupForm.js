@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import { Button, Form, FormField, FormInput } from '../../App/elemental';
-import Brand from '../Brand';
+import Brand from './Brand';
 import TinyMCE from 'react-tinymce';
 
 const SignupForm = ({
