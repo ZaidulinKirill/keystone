@@ -69,7 +69,7 @@ const SignupForm = ({
 							type="text"
 							name="comment"
 							multiline
-							style={{ height: '130px !important' }}
+							style={{ height: 130 }}
 							numberOfLines={8}
 							onChange={handleInputChange}
 							value={comment}
