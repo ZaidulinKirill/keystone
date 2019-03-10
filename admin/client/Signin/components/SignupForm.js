@@ -63,6 +63,18 @@ const SignupForm = ({
 							value={password}
 					/>
 					</FormField>
+					<FormField label="comment (комментарий)" htmlFor="comment">
+						<FormInput
+							autoFocus
+							type="text"
+							name="comment"
+							multiline
+							style={{ height: '130px !important' }}
+							numberOfLines={8}
+							onChange={handleInputChange}
+							value={comment}
+					/>
+					</FormField>
 					<FormField label="Biography (биография)" htmlFor="biography">
 						<TinyMCE
 							autoFocus
@@ -70,27 +82,10 @@ const SignupForm = ({
 							config={{
 								plugins: 'autolink link image lists print preview',
 								toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
+								height: 400,
 							}}
 							onChange={handleInputChange}
 						/>
-						{/* <FormInput
-							autoFocus
-							type="text"
-							name="biography"
-							onChange={handleInputChange}
-							value={biography}
-					/> */}
-					</FormField>
-					<FormField label="comment (комментарий)" htmlFor="comment">
-						<FormInput
-							autoFocus
-							type="text"
-							name="comment"
-							multiline
-							numberOfLines={8}
-							onChange={handleInputChange}
-							value={comment}
-					/>
 					</FormField>
 					<Button disabled={isAnimating} color="primary" type="submit">
 					Register
