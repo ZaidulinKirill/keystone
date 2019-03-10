@@ -183,6 +183,8 @@ var SigninView = React.createClass({
 					<div className={boxClassname}>
 						<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
 						<SignupForm
+							logo={this.props.logo}
+							brand={this.props.brand}
 							firstName={this.state.firstName}
 							lastName={this.state.lastName}
 							email={this.state.email}

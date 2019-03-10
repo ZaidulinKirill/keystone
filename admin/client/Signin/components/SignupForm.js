@@ -8,6 +8,8 @@ import Brand from './Brand';
 import TinyMCE from 'react-tinymce';
 
 const SignupForm = ({
+	logo,
+	brand,
 	firstName,
 	secondName,
 	email,
@@ -21,8 +23,8 @@ const SignupForm = ({
 	return (
 		<div className="">
 			<Brand
-				logo={this.props.logo}
-				brand={this.props.brand}
+				logo={logo}
+				brand={brand}
 			/>
 			<div className="">
 				<Form onSubmit={handleSubmit} noValidate>
@@ -101,12 +103,14 @@ const SignupForm = ({
 
 SignupForm.propTypes = {
 	biography: PropTypes.string,
+	brand: PropTypes.string,
 	comment: PropTypes.string,
 	email: PropTypes.string,
 	firstName: PropTypes.string,
 	handleInputChange: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	isAnimating: PropTypes.bool,
+	logo: PropTypes.string,
 	password: PropTypes.string,
 	secondName: PropTypes.string,
 };
