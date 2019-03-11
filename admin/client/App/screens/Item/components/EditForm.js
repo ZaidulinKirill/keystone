@@ -250,7 +250,7 @@ var EditForm = React.createClass({
 			);
 		}
 	},
-	renderFormElements () {
+	renderFormElements (user) {
 		var headings = 0;
 
 		return this.props.list.uiElements.map((el, index) => {
@@ -279,6 +279,12 @@ var EditForm = React.createClass({
 				if (index === 0 && this.state.focusFirstField) {
 					props.autoFocus = true;
 				}
+				console.log(props.key);
+				console.log(this.props.list);
+
+				// if (user && user.isAuthor && props.key) {
+
+				// }
 				return React.createElement(Fields[field.type], props);
 			}
 		}, this);
