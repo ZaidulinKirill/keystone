@@ -135,11 +135,6 @@ var SigninView = React.createClass({
 
 		if (this.state.isSignupCompleted) {
 			return (<div className="auth-wrapper">
-				<Alert
-					isInvalid={this.state.isInvalid}
-					signedOut={this.state.signedOut}
-					invalidMessage={this.state.invalidMessage}
-					/>
 				<div className={boxClassname}>
 					<SignupSuccess
 						logo={this.props.logo}
