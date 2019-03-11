@@ -216,7 +216,7 @@ var EditForm = React.createClass({
 			);
 		}
 	},
-	renderNameField () {
+	renderNameField (user) {
 		var nameField = this.props.list.nameField;
 		var nameFieldIsFormHeader = this.props.list.nameFieldIsFormHeader;
 		var wrapNameField = field => (
@@ -224,6 +224,13 @@ var EditForm = React.createClass({
 				{field}
 			</div>
 		);
+
+		if (user && user.isAuthor) {
+			return wrapNameField(
+				<h2>{this.props.data.name || '(no name)'}</h2>
+			);
+		}
+
 		if (nameFieldIsFormHeader) {
 			var nameFieldProps = this.getFieldProps(nameField);
 			nameFieldProps.label = null;
@@ -276,7 +283,7 @@ var EditForm = React.createClass({
 			}
 		}, this);
 	},
-	renderFooterBar () {
+	renderFooterBar (user) {
 		if (this.props.list.noedit && this.props.list.nodelete) {
 			return null;
 		}
@@ -286,9 +293,6 @@ var EditForm = React.createClass({
 
 		// Padding must be applied inline so the FooterBar can determine its
 		// innerHeight at runtime. Aphrodite's styling comes later...
-
-		const user = JSON.parse(Cookies.get('user') || '{}');
-
 		return (
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
@@ -393,21 +397,23 @@ var EditForm = React.createClass({
 		) : null;
 	},
 	render () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<form ref="editForm" className="EditForm-container">
 				{(this.state.alerts) ? <AlertMessages alerts={this.state.alerts} /> : null}
 				<Grid.Row>
 					<Grid.Col large="three-quarters">
 						<Form layout="horizontal" component="div">
-							{this.renderNameField()}
-							{this.renderKeyOrId()}
-							{this.renderFormElements()}
-							{this.renderTrackingMeta()}
+							{this.renderNameField(user)}
+							{this.renderKeyOrId(user)}
+							{this.renderFormElements(user)}
+							{this.renderTrackingMeta(user)}
 						</Form>
 					</Grid.Col>
 					<Grid.Col large="one-quarter"><span /></Grid.Col>
 				</Grid.Row>
-				{this.renderFooterBar()}
+				{this.renderFooterBar(user)}
 				<ConfirmationDialog
 					confirmationLabel="Reset"
 					isOpen={this.state.resetDialogIsOpen}

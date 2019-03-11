@@ -82,10 +82,6 @@ var ListColumnsForm = React.createClass({
 		});
 	},
 	render () {
-		const user = JSON.parse(Cookies.get('user') || '{}');
-		if (user && user.isAuthor) {
-			return null;
-		}
 
 		const formFieldStyles = {
 			borderBottom: '1px dashed rgba(0,0,0,0.1)',
