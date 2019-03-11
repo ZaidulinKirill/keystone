@@ -90,11 +90,10 @@ var PrimaryNavigation = React.createClass({
 	renderNavigation () {
 		if (!this.props.sections || !this.props.sections.length) return null;
 
-		// const user = JSON.parse(Cookies.get('user') || '{}');
-		console.log(Keystone.user);
+		const user = JSON.parse(Cookies.get('user') || '{}');
 
 		return this.props.sections
-		.filter(x => !Keystone.user.isAuthor || x.key === 'works')
+		.filter(x => !user.isAuthor || x.key === 'Work')
 		.map((section) => {
 			console.log(section.lists[0]);
 
