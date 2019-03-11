@@ -4,6 +4,7 @@
 
 import React, { PropTypes } from 'react';
 import Brand from './Brand';
+import { Button, Form, FormField, FormInput } from '../../App/elemental';
 
 const SignupSuccess = ({
 	logo,
@@ -17,8 +18,11 @@ const SignupSuccess = ({
 				fullscreen
 			/>
 			<div className="">
-				<h3>Your application has been successfully accepted! (Ваша заявка на регистрацию успешно принята!)</h3>
-				<p>Please wait for the verification result. You will be notified with email message. (Пожалуйста, ожидайте результатов проверки. Вы будете уведомлены через электронную почту)</p>
+				<Form>
+					<h3>Your application has been successfully accepted! (Ваша заявка на регистрацию успешно принята!)</h3>
+					<p>Please wait for the verification result. You will be notified with email message. (Пожалуйста, ожидайте результатов проверки. Вы будете уведомлены через электронную почту)</p>
+					<Button color="primary" type="submit" onclick="window.location = 'https://www.example.com'" />
+				</Form>
 			</div>
 		</div>
 	);
