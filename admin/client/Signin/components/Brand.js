@@ -19,8 +19,8 @@ const Brand = function (props) {
 		}
 	}
 	return (
-		<div className="auth-box__col">
-			<div className="auth-box__brand">
+		<div className={props.fullscreen ? '' : 'auth-box__col'}>
+			<div className="auth-box__brand" style={{ border: '0px' }}>
 				<a href="/" className="auth-box__brand__logo">
 					<img
 						src={logo.src}

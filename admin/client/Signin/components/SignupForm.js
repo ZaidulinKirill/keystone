@@ -25,6 +25,7 @@ const SignupForm = ({
 			<Brand
 				logo={logo}
 				brand={brand}
+				fullscreen
 			/>
 			<div className="">
 				<Form onSubmit={handleSubmit} noValidate>
@@ -84,7 +85,12 @@ const SignupForm = ({
 								toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
 								height: 400,
 							}}
-							onChange={handleInputChange}
+							onChange={e => handleInputChange({
+								target: {
+									name: 'biography',
+									value: e.getContent(),
+								},
+							})}
 						/>
 					</FormField>
 					<Button disabled={isAnimating} color="primary" type="submit">

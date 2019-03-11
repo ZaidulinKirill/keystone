@@ -19,7 +19,7 @@ var SigninView = React.createClass({
 		return {
 			firstName: '',
 			lastName: '',
-			biography: '<p>Please enter your biography here (пожалуйста, введите свою биографию здесь)</p>',
+			biography: '',
 			email: '',
 			comment: '',
 			password: '',
@@ -74,6 +74,7 @@ var SigninView = React.createClass({
 	},
 	handleSignupSubmit (e) {
 		e.preventDefault();
+		console.log(this.state);
 		if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName
 				|| !this.state.biography) {
 			return this.displayError(

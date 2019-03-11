@@ -14,6 +14,7 @@ const SignupSuccess = ({
 			<Brand
 				logo={logo}
 				brand={brand}
+				fullscreen
 			/>
 			<div className="">
 				<h3>Your application has been successfully accepted! (Ваша заявка на регистрацию успешно принята!)</h3>
