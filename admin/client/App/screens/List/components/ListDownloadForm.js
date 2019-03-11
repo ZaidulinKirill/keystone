@@ -4,6 +4,7 @@ import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
 import ListHeaderButton from './ListHeaderButton';
 import { LabelledControl, Form, FormField, SegmentedControl } from '../../../elemental';
+import Cookies from 'js-cookie';
 
 import { downloadItems } from '../actions';
 const FORMAT_OPTIONS = [
@@ -101,6 +102,11 @@ var ListDownloadForm = React.createClass({
 		this.togglePopout(false);
 	},
 	renderColumnSelect () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor) {
+			return null;
+		}
+
 		if (this.state.useCurrentColumns) return null;
 
 		const possibleColumns = this.getListUIElements().map((el, i) => {
@@ -143,6 +149,11 @@ var ListDownloadForm = React.createClass({
 		);
 	},
 	render () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor) {
+			return null;
+		}
+
 		const { useCurrentColumns } = this.state;
 
 		return (
