@@ -90,11 +90,11 @@ var PrimaryNavigation = React.createClass({
 	renderNavigation () {
 		if (!this.props.sections || !this.props.sections.length) return null;
 
-		const user = JSON.parse(Cookies.get('user') || '{}');
-		console.log(user);
+		// const user = JSON.parse(Cookies.get('user') || '{}');
+		console.log(Keystone.user);
 
 		return this.props.sections.map((section) => {
-			console.log(section.lists[0]);
+			// console.log(section.lists[0]);
 
 			// Get the link and the class name
 			const to = !section.lists[0].external && `${Keystone.adminPath}/${section.lists[0].path}`;
