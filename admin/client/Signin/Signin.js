@@ -12,6 +12,7 @@ import Brand from './components/Brand';
 import UserInfo from './components/UserInfo';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import SignupSuccess from './components/SignupSuccess';
 
 var SigninView = React.createClass({
 	getInitialState () {
@@ -26,6 +27,7 @@ var SigninView = React.createClass({
 			isInvalid: false,
 			invalidMessage: '',
 			signedOut: window.location.search === '?signedout',
+			isSignupCompleted: false,
 		};
 	},
 	componentDidMount () {
@@ -71,33 +73,33 @@ var SigninView = React.createClass({
 		});
 	},
 	handleSignupSubmit (e) {
-		console.log('Signup');
 		e.preventDefault();
-		// If either password or mail are missing, show an error
-		if (!this.state.email || !this.state.password) {
-			return this.displayError('Please enter an email address and password to sign in.');
+		if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName
+				|| !this.state.biography) {
+			return this.displayError(
+				`Please enter all information about yourself. Пожалуйста, введите всю информацию о себе.`
+			);
 		}
 
 		xhr({
-			url: `${Keystone.adminPath}/api/session/signin`,
+			url: `/api/signup`,
 			method: 'post',
 			json: {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
 				email: this.state.email,
 				password: this.state.password,
+				biography: this.state.biography,
+				comment: this.state.comment,
 			},
 			headers: assign({}, Keystone.csrf.header),
 		}, (err, resp, body) => {
 			if (err || body && body.error) {
 				return body.error === 'invalid csrf'
 					? this.displayError('Something went wrong; please refresh your browser and try again.')
-					: this.displayError('The email and password you entered are not valid.');
+					: this.displayError('The error occurred');
 			} else {
-				// Redirect to where we came from or to the default admin path
-				if (Keystone.redirect) {
-					top.location.href = Keystone.redirect;
-				} else {
-					top.location.href = this.props.from ? this.props.from : Keystone.adminPath;
-				}
+				this.setState({ isSignupCompleted: true });
 			}
 		});
 	},
@@ -130,10 +132,26 @@ var SigninView = React.createClass({
 			'auth-box--has-errors': this.state.isAnimating,
 		});
 
-
-		console.log(this.props);
-		console.log(window.location.search);
-		if (!window.location.search || !window.location.search.includes('register=true')) {
+		if (this.state.isSignupCompleted) {
+			<div className="auth-wrapper">
+				<Alert
+					isInvalid={this.state.isInvalid}
+					signedOut={this.state.signedOut}
+					invalidMessage={this.state.invalidMessage}
+					/>
+				<div className={boxClassname}>
+					<SignupSuccess
+						logo={this.props.logo}
+						brand={this.props.brand}
+						/>
+				</div>
+				<div className="auth-footer">
+					<span>Powered by </span>
+					<a href="http://keystonejs.com" target="_blank" title="The Node.js CMS and web application platform (new window)">KeystoneJS</a>
+				</div>
+			</div>;
+		}
+		else if (!window.location.search || !window.location.search.includes('register=true')) {
 			return (
 				<div className="auth-wrapper">
 					<Alert
