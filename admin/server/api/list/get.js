@@ -23,19 +23,20 @@ module.exports = function (req, res) {
 		try { filters = JSON.parse(req.query.filters); }
 		catch (e) { } // eslint-disable-line no-empty
 	}
-	console.log(filters);
+
 	if (typeof filters === 'object') {
 		assign(where, req.list.addFiltersToQuery(filters));
-		console.log(where);
 	}
 	if (req.query.search) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
 	}
 
-	var query = req.list.model.find({
+	const queryFilter = {
 		where,
 		...(req.query.where || {}),
-	});
+	};
+	console.log(queryFilter);
+	var query = req.list.model.find(queryFilter);
 	if (req.query.populate) {
 		query.populate(req.query.populate);
 	}
