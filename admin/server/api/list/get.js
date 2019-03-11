@@ -35,7 +35,7 @@ module.exports = function (req, res) {
 		...where,
 		...(req.query.where || {}),
 	};
-	console.log(queryFilter);
+	console.log(req.list);
 	var query = req.list.model.find(queryFilter);
 	if (req.query.populate) {
 		query.populate(req.query.populate);
