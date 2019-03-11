@@ -75,12 +75,14 @@ var PrimaryNavigation = React.createClass({
 		const { brand, currentSectionKey } = this.props;
 		const className = currentSectionKey === 'dashboard' ? 'primary-navbar__brand primary-navbar__item--active' : 'primary-navbar__brand';
 
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<PrimaryNavItem
 				className={className}
 				label="octicon-home"
 				title={'Dashboard - ' + brand}
-				to={Keystone.adminPath}
+				to={!user.isAuthor ? Keystone.adminPath : `/keystone/authors/${user.author}`}
 			>
 				<span className="octicon octicon-home" />
 			</PrimaryNavItem>

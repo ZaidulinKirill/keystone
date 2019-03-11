@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import Lists from './components/Lists';
 import Section from './components/Section';
 import AlertMessages from '../../shared/AlertMessages';
+
 import {
 	loadCounts,
 } from './actions';
@@ -38,57 +39,109 @@ var HomeView = React.createClass({
 		const spinner = this.getSpinner();
 		const user = JSON.parse(Cookies.get('user') || '{}');
 
-		return (
-			<Container data-screen-id="home">
-				<div className="dashboard-header">
-					<div className="dashboard-heading">{Keystone.brand}</div>
-				</div>
-				<div className="dashboard-groups">
-					{(this.props.error) && (
-						<AlertMessages
-							alerts={{ error: { error:
-								"There is a problem with the network, we're trying to reconnect...",
-							} }}
-						/>
-					)}
-					{/* Render flat nav */}
-					{Keystone.nav.flat ? (
-						<Lists
-							counts={this.props.counts}
-							lists={Keystone.lists}
-							spinner={spinner}
-						/>
-					) : (
-						<div>
-							{/* Render nav with sections */}
-							{Keystone.nav.sections
-							.filter(x => !user.isAuthor || x.key === 'Work')
-							.map((navSection) => {
-								return (
-									<Section key={navSection.key} id={navSection.key} label={navSection.label}>
+		if (user.isAuthor) {
+			return (
+				<Container data-screen-id="home">
+					<div className="dashboard-header">
+						<div className="dashboard-heading">{(user.name.last || '')(user.name.first || '')}</div>
+					</div>
+					<div className="dashboard-groups">
+						{(this.props.error) && (
+							<AlertMessages
+								alerts={{ error: { error:
+									"There is a problem with the network, we're trying to reconnect...",
+								} }}
+							/>
+						)}
+						<h3>Your description</h3>
+						{Keystone.nav.flat ? (
+							<Lists
+								counts={this.props.counts}
+								lists={Keystone.lists}
+								spinner={spinner}
+							/>
+						) : (
+							<div>
+								{/* Render nav with sections */}
+								{Keystone.nav.sections
+								.map((navSection) => {
+									return (
+										<Section key={navSection.key} id={navSection.key} label={navSection.label}>
+											<Lists
+												counts={this.props.counts}
+												lists={navSection.lists}
+												spinner={spinner}
+											/>
+										</Section>
+									);
+								})}
+								{/* Render orphaned lists */}
+								{Keystone.orphanedLists.length ? (
+									<Section label="Other" icon="octicon-database">
 										<Lists
 											counts={this.props.counts}
-											lists={navSection.lists}
+											lists={Keystone.orphanedLists}
 											spinner={spinner}
 										/>
 									</Section>
-								);
-							})}
-							{/* Render orphaned lists */}
-							{Keystone.orphanedLists.length ? (
-								<Section label="Other" icon="octicon-database">
-									<Lists
-										counts={this.props.counts}
-										lists={Keystone.orphanedLists}
-										spinner={spinner}
-									/>
-								</Section>
-							) : null}
-						</div>
-					)}
-				</div>
-			</Container>
-		);
+								) : null}
+							</div>
+						)}
+					</div>
+				</Container>
+			);
+		} else {
+			return (
+				<Container data-screen-id="home">
+					<div className="dashboard-header">
+						<div className="dashboard-heading">{Keystone.brand}</div>
+					</div>
+					<div className="dashboard-groups">
+						{(this.props.error) && (
+							<AlertMessages
+								alerts={{ error: { error:
+									"There is a problem with the network, we're trying to reconnect...",
+								} }}
+							/>
+						)}
+						{/* Render flat nav */}
+						{Keystone.nav.flat ? (
+							<Lists
+								counts={this.props.counts}
+								lists={Keystone.lists}
+								spinner={spinner}
+							/>
+						) : (
+							<div>
+								{/* Render nav with sections */}
+								{Keystone.nav.sections
+								.map((navSection) => {
+									return (
+										<Section key={navSection.key} id={navSection.key} label={navSection.label}>
+											<Lists
+												counts={this.props.counts}
+												lists={navSection.lists}
+												spinner={spinner}
+											/>
+										</Section>
+									);
+								})}
+								{/* Render orphaned lists */}
+								{Keystone.orphanedLists.length ? (
+									<Section label="Other" icon="octicon-database">
+										<Lists
+											counts={this.props.counts}
+											lists={Keystone.orphanedLists}
+											spinner={spinner}
+										/>
+									</Section>
+								) : null}
+							</div>
+						)}
+					</div>
+				</Container>
+			);
+		}
 	},
 });
 
