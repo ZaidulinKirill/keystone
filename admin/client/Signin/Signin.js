@@ -134,7 +134,7 @@ var SigninView = React.createClass({
 		});
 
 		if (this.state.isSignupCompleted) {
-			<div className="auth-wrapper">
+			return (<div className="auth-wrapper">
 				<Alert
 					isInvalid={this.state.isInvalid}
 					signedOut={this.state.signedOut}
@@ -150,7 +150,7 @@ var SigninView = React.createClass({
 					<span>Powered by </span>
 					<a href="http://keystonejs.com" target="_blank" title="The Node.js CMS and web application platform (new window)">KeystoneJS</a>
 				</div>
-			</div>;
+			</div>);
 		}
 		else if (!window.location.search || !window.location.search.includes('register=true')) {
 			return (
