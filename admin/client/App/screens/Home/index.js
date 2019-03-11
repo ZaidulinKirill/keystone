@@ -13,6 +13,7 @@ import AlertMessages from '../../shared/AlertMessages';
 import {
 	loadCounts,
 } from './actions';
+import Cookies from 'js-cookie';
 
 var HomeView = React.createClass({
 	displayName: 'HomeView',
@@ -21,8 +22,6 @@ var HomeView = React.createClass({
 			modalIsOpen: true,
 		};
 	},
-	// When everything is rendered, start loading the item counts of the lists
-	// from the API
 	componentDidMount () {
 		this.props.dispatch(loadCounts());
 	},
@@ -37,6 +36,8 @@ var HomeView = React.createClass({
 	},
 	render () {
 		const spinner = this.getSpinner();
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<Container data-screen-id="home">
 				<div className="dashboard-header">
@@ -60,7 +61,9 @@ var HomeView = React.createClass({
 					) : (
 						<div>
 							{/* Render nav with sections */}
-							{Keystone.nav.sections.map((navSection) => {
+							{Keystone.nav.sections
+							.filter(x => !user.isAuthor || x.key === 'Work')
+							.map((navSection) => {
 								return (
 									<Section key={navSection.key} id={navSection.key} label={navSection.label}>
 										<Lists

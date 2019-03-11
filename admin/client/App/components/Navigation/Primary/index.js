@@ -93,10 +93,8 @@ var PrimaryNavigation = React.createClass({
 		const user = JSON.parse(Cookies.get('user') || '{}');
 
 		return this.props.sections
-		.filter(x => !user.isAuthor || x.key === 'Work')
+		.filter(x => !user.isAuthor || x.lists[0].key === 'Work')
 		.map((section) => {
-			console.log(section.lists[0]);
-
 			// Get the link and the class name
 			const to = !section.lists[0].external && `${Keystone.adminPath}/${section.lists[0].path}`;
 			const href = section.lists[0].external && section.lists[0].path;
