@@ -26,6 +26,8 @@ import { deleteItem } from '../actions';
 
 import { upcase } from '../../../../utils/string';
 
+import Cookies from 'js-cookie';
+
 function getNameFromData (data) {
 	if (typeof data === 'object') {
 		if (typeof data.first === 'string' && typeof data.last === 'string') {
@@ -285,6 +287,8 @@ var EditForm = React.createClass({
 		// Padding must be applied inline so the FooterBar can determine its
 		// innerHeight at runtime. Aphrodite's styling comes later...
 
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
@@ -307,7 +311,8 @@ var EditForm = React.createClass({
 							/>
 						</Button>
 					)}
-					{!this.props.list.nodelete && (
+
+					{!this.props.list.nodelete && (!user || !user.isAuthor) && (
 						<Button disabled={loading} onClick={this.toggleDeleteDialog} variant="link" color="delete" style={styles.deleteButton} data-button="delete">
 							<ResponsiveText
 								hiddenXS={`delete ${this.props.list.singular.toLowerCase()}`}
