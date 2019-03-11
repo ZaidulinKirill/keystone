@@ -71,7 +71,7 @@ module.exports = function createDynamicRouter (keystone) {
 	// #3: Home route
 	router.get('/', redirectIfAuthor, IndexRoute);
 
-	router.get('/keystone/authors', redirectIfAuthor);
+	router.get('/authors', redirectIfAuthor);
 
 	// #4: Cloudinary and S3 specific APIs
 	// TODO: poor separation of concerns; should / could this happen elsewhere?
