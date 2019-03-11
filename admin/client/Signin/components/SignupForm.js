@@ -88,7 +88,7 @@ const SignupForm = ({
 							onChange={e => handleInputChange({
 								target: {
 									name: 'biography',
-									value: e.getContent(),
+									value: e.target.getContent(),
 								},
 							})}
 						/>
