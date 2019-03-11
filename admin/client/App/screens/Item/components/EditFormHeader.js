@@ -6,6 +6,7 @@ import Toolbar from './Toolbar';
 import ToolbarSection from './Toolbar/ToolbarSection';
 import EditFormHeaderSearch from './EditFormHeaderSearch';
 import { Link } from 'react-router';
+import Cookies from 'js-cookie';
 
 import Drilldown from './Drilldown';
 import { GlyphButton, ResponsiveText } from '../../../elemental';
@@ -100,7 +101,13 @@ export const EditFormHeader = React.createClass({
 		);
 	},
 	renderSearch () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor) {
+			return null;
+		}
+
 		var list = this.props.list;
+
 		return (
 			<form action={`${Keystone.adminPath}/${list.path}`} className="EditForm__header__search">
 				<EditFormHeaderSearch
@@ -132,6 +139,11 @@ export const EditFormHeader = React.createClass({
 	},
 	renderCreateButton () {
 		const { nocreate, autocreate, singular } = this.props.list;
+
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor && singular === 'Author') {
+			return null;
+		}
 
 		if (nocreate) return null;
 
