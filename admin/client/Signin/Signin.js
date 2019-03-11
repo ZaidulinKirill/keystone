@@ -98,7 +98,7 @@ var SigninView = React.createClass({
 			if (err || body && body.error) {
 				return body.error === 'invalid csrf'
 					? this.displayError('Something went wrong; please refresh your browser and try again.')
-					: this.displayError('The error occurred');
+					: this.displayError(body.error);
 			} else {
 				this.setState({ isSignupCompleted: true });
 			}
