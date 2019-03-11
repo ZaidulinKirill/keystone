@@ -31,12 +31,14 @@ module.exports = function (req, res) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
 	}
 
+	console.log(req.list.options.schema);
+
 	const queryFilter = {
 		...where,
-		...(req.query.where || {}),
+		...(req.list.options.schema.adminFilter ? req.list.options.schema.adminFilter(req, res) : {}),
 	};
-	console.log(req.list.options);
-	if (req.list.options.test) {
+	console.log(queryFilter);
+	if (req.list.options.schema.test) {
 		req.list.options.test(req, res);
 	}
 
