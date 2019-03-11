@@ -21,7 +21,9 @@ const SignupSuccess = ({
 				<Form>
 					<h3>Your application has been successfully accepted! (Ваша заявка на регистрацию успешно принята!)</h3>
 					<p>Please wait for the verification result. You will be notified with email message. (Пожалуйста, ожидайте результатов проверки. Вы будете уведомлены через электронную почту)</p>
-					<Button color="primary" type="submit" onClick="window.location = 'https://www.example.com'" />
+					<Button color="primary" type="submit" onClick={() => { window.location = '/'; }}>
+					Back
+					</Button>
 				</Form>
 			</div>
 		</div>
