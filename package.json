@@ -49,6 +49,7 @@
     "glamor": "^2.20.25",
     "grappling-hook": "^3.0.0",
     "i": "^0.3.5",
+    "js-cookie": "^2.2.0",
     "kerberos": "^0.0.23",
     "keystone-storage-namefunctions": "^1.1.1",
     "keystone-utils": "^0.4.0",

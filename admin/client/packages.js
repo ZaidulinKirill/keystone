@@ -42,4 +42,5 @@ module.exports = [
 	'redux',
 	'vkey',
 	'xhr',
+	'js-cookie',
 ];

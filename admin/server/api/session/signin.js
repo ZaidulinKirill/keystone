@@ -20,6 +20,8 @@ function signin (req, res) {
 						session.signinWithUser(user, req, res, function () {
 							keystone.callHook(user, 'post:signin', req, function (err) {
 								if (err) return res.status(500).json({ error: 'post:signin error', detail: err });
+
+								res.cookie('user', JSON.stringify(user), { maxAge: 365 * 24 * 60 * 60 * 1000 });
 								res.json({ success: true, user: user });
 							});
 						});
