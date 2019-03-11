@@ -279,12 +279,20 @@ var EditForm = React.createClass({
 				if (index === 0 && this.state.focusFirstField) {
 					props.autoFocus = true;
 				}
-				console.log(props.key);
-				console.log(this.props.list);
 
-				// if (user && user.isAuthor && props.key) {
+				if (user && user.isAuthor) {
+					if (this.props.list.key === 'Author' && props.key !== 'description') {
+						return null;
+					}
 
-				// }
+					if (this.props.list.key === 'Work' && props.key !== 'name'
+						&& props.key !== 'sort' && props.key !== 'sortInCarousel' && props.key !== 'authorPageMode'
+						&& props.key !== 'isInCarousel' && props.key !== 'useAsAuthorPreview' && props.key !== 'carouselArea'
+						&& props.key !== 'authorPreviewArea') {
+						return null;
+					}
+				}
+
 				return React.createElement(Fields[field.type], props);
 			}
 		}, this);

@@ -7,6 +7,7 @@ import React from 'react';
 // import { findDOMNode } from 'react-dom'; // TODO re-implement focus when ready
 import numeral from 'numeral';
 import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
 
 import {
 	BlankState,
@@ -512,6 +513,12 @@ const ListView = React.createClass({
 		);
 	},
 	render () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		console.log(this.props.currentList);
+		if (user && user.isAuthor && this.props.currentList && this.props.currentList.key === 'Author') {
+			window.location = `/keystone/authors/${user.author}`;
+		}
+
 		if (!this.props.ready) {
 			return (
 				<Center height="50vh" data-screen-id="list">

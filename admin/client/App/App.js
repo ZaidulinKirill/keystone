@@ -12,6 +12,7 @@ import MobileNavigation from './components/Navigation/Mobile';
 import PrimaryNavigation from './components/Navigation/Primary';
 import SecondaryNavigation from './components/Navigation/Secondary';
 import Footer from './components/Footer';
+import Cookies from 'js-cookie';
 
 const classes = {
 	wrapper: {
@@ -28,6 +29,11 @@ const App = (props) => {
 	const listsByPath = require('../utils/lists').listsByPath;
 	let children = props.children;
 
+	const user = JSON.parse(Cookies.get('user') || '{}');
+	if (!user) {
+
+		return '<h2>Error occurred.Please signout and try again (Произошла ошибка. Пожалуйста, выйдите из аккаунта и зайдите снова)</h2>';
+	}
 	// If we're on either a list or an item view
 	let currentList, currentSection;
 	if (props.params.listId) {
