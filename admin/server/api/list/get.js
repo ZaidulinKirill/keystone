@@ -35,7 +35,11 @@ module.exports = function (req, res) {
 		...where,
 		...(req.query.where || {}),
 	};
-	console.log(Object.keys(req.list));
+	console.log(req.list.options);
+	if (req.list.options.test) {
+		req.list.options.test(req, res);
+	}
+
 	var query = req.list.model.find(queryFilter);
 	if (req.query.populate) {
 		query.populate(req.query.populate);
