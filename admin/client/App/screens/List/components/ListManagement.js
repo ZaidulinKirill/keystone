@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Cookies from 'js-cookie';
 import {
 	Button,
 	GlyphButton,
@@ -82,14 +83,17 @@ function ListManagement ({
 		</Section>
 	) : null;
 
+	const user = JSON.parse(Cookies.get('user') || '{}');
+
 	// put it all together
 	return (
 		<div>
 			<Group style={{ float: 'left', marginRight: '.75em', marginBottom: 0 }}>
 				<Section>
-					<Button active={isOpen} onClick={() => handleToggle(!isOpen)}>
+					{user && user.isAuthor ? null
+					: <Button active={isOpen} onClick={() => handleToggle(!isOpen)}>
 						Manage
-					</Button>
+					</Button>}
 				</Section>
 				{selectButtons}
 				{actionButtons}

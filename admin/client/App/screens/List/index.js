@@ -514,8 +514,8 @@ const ListView = React.createClass({
 	},
 	render () {
 		const user = JSON.parse(Cookies.get('user') || '{}');
-		console.log(JSON.stringify(this.props.currentList));
-		if (user && user.isAuthor && this.props.currentList && this.props.currentList.key === 'Author') {
+		console.log(JSON.stringify(this.props.currentList.id));
+		if (user && user.isAuthor && this.props.currentList && this.props.currentList.id !== 'works') {
 			window.location = `/keystone/authors/${user.author}`;
 		}
 
