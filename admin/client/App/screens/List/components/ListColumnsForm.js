@@ -5,6 +5,7 @@ import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
 import { FormInput } from '../../../elemental';
 import ListHeaderButton from './ListHeaderButton';
+import Cookies from 'js-cookie';
 
 import { setActiveColumns } from '../actions';
 
@@ -81,6 +82,11 @@ var ListColumnsForm = React.createClass({
 		});
 	},
 	render () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor) {
+			return null;
+		}
+
 		const formFieldStyles = {
 			borderBottom: '1px dashed rgba(0,0,0,0.1)',
 			marginBottom: '1em',
