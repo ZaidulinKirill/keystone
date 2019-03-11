@@ -18,7 +18,7 @@ var SigninView = React.createClass({
 	getInitialState () {
 		return {
 			firstName: '',
-			lastName: '',
+			secondName: '',
 			biography: '',
 			email: '',
 			comment: '',
@@ -75,7 +75,7 @@ var SigninView = React.createClass({
 	handleSignupSubmit (e) {
 		e.preventDefault();
 		console.log(this.state);
-		if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName
+		if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.secondName
 				|| !this.state.biography) {
 			return this.displayError(
 				`Please enter all information about yourself. Пожалуйста, введите всю информацию о себе.`
@@ -87,7 +87,7 @@ var SigninView = React.createClass({
 			method: 'post',
 			json: {
 				firstName: this.state.firstName,
-				lastName: this.state.lastName,
+				secondName: this.state.secondName,
 				email: this.state.email,
 				password: this.state.password,
 				biography: this.state.biography,
@@ -205,7 +205,7 @@ var SigninView = React.createClass({
 							logo={this.props.logo}
 							brand={this.props.brand}
 							firstName={this.state.firstName}
-							lastName={this.state.lastName}
+							secondName={this.state.secondName}
 							email={this.state.email}
 							biography={this.state.biography}
 							comment={this.state.comment}
