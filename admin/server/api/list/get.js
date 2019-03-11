@@ -23,8 +23,10 @@ module.exports = function (req, res) {
 		try { filters = JSON.parse(req.query.filters); }
 		catch (e) { } // eslint-disable-line no-empty
 	}
+	console.log(filters);
 	if (typeof filters === 'object') {
 		assign(where, req.list.addFiltersToQuery(filters));
+		console.log(where);
 	}
 	if (req.query.search) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
