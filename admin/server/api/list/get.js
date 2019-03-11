@@ -31,8 +31,6 @@ module.exports = function (req, res) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
 	}
 
-	console.log(req.list.options);
-
 	const queryFilter = {
 		...where,
 		...(req.list.options.customFilter ? req.list.options.customFilter(req, res) : {}),
