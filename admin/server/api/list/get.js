@@ -32,7 +32,7 @@ module.exports = function (req, res) {
 	}
 
 	const queryFilter = {
-		where,
+		...where,
 		...(req.query.where || {}),
 	};
 	console.log(queryFilter);
