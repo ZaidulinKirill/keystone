@@ -35,7 +35,7 @@ module.exports = function IndexRoute (req, res) {
 		nav: keystone.nav,
 		orphanedLists: orphanedLists,
 		signoutUrl: keystone.get('signout url'),
-		rawKeystone: keystone,
+		// rawKeystone: keystone,
 		user: {
 			id: req.user.id,
 			name: UserList.getDocumentName(req.user) || '(no name)',
