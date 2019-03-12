@@ -130,6 +130,7 @@ const CreateForm = React.createClass({
 				nameFieldProps.placeholder = nameField.label;
 				nameFieldProps.label = '';
 			}
+
 			form.push(React.createElement(Fields[nameField.type], nameFieldProps));
 		}
 
@@ -138,6 +139,10 @@ const CreateForm = React.createClass({
 			var field = list.fields[list.initialFields[key]];
 			// If there's something weird passed in as field type, render the
 			// invalid field type component
+
+			console.log(field);
+			// if (user && user.isAuthor && )
+
 			if (typeof Fields[field.type] !== 'function') {
 				form.push(React.createElement(InvalidFieldType, { type: field.type, path: field.path, key: field.path }));
 				return;
