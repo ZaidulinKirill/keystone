@@ -78,8 +78,9 @@ const CreateForm = React.createClass({
 		event.preventDefault();
 		const createForm = event.target;
 		const formData = new FormData(createForm);
-
+		console.log(user);
 		if (user && user.isAuthor) {
+			console.log('here');
 			xhr({
 				url: `/api/applications?entity=work`,
 				method: 'post',
@@ -183,8 +184,10 @@ const CreateForm = React.createClass({
 			// If there's something weird passed in as field type, render the
 			// invalid field type component
 
-			console.log(field);
-			// if (user && user.isAuthor && )
+			if (user && user.isAuthor && field.path !== 'name' && field.path !== 'image'
+			&& field.path !== 'fragments') {
+				return null;
+			}
 
 			if (typeof Fields[field.type] !== 'function') {
 				form.push(React.createElement(InvalidFieldType, { type: field.type, path: field.path, key: field.path }));
