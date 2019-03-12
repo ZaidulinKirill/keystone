@@ -179,35 +179,14 @@ var EditForm = React.createClass({
 		});
 	},
 	acceptApplication () {
-		const { data, list } = this.props;
-		const editForm = this.refs.editForm;
-
-		// Fix for Safari where XHR form submission fails when input[type=file] is empty
-		// https://stackoverflow.com/questions/49614091/safari-11-1-ajax-xhr-form-submission-fails-when-inputtype-file-is-empty
-		$(editForm).find("input[type='file']").each(function () {
-			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', true); }
-		});
-
-		const formData = new FormData(editForm);
-
-
-		$(editForm).find("input[type='file']").each(function () {
-			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', false); }
-		});
-
-		// Show loading indicator
+				// Show loading indicator
 		this.setState({
 			loading: true,
 		});
 
-		var object = {};
-		formData.forEach(function (value, key) {
-			object[key] = value;
-		});
-		console.log(object);
-
+		const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 		xhr({
-			url: `/api/applications/${object._id}?entity=work&action=accept`,
+			url: `/api/applications/${id}?entity=work&action=accept`,
 			method: 'post',
 		}, (err, resp, body) => {
 			if (err) {
@@ -232,35 +211,15 @@ var EditForm = React.createClass({
 		});
 	},
 	submitForModeration () {
-		const { data, list } = this.props;
-		const editForm = this.refs.editForm;
-
-		// Fix for Safari where XHR form submission fails when input[type=file] is empty
-		// https://stackoverflow.com/questions/49614091/safari-11-1-ajax-xhr-form-submission-fails-when-inputtype-file-is-empty
-		$(editForm).find("input[type='file']").each(function () {
-			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', true); }
-		});
-
-		const formData = new FormData(editForm);
-
-
-		$(editForm).find("input[type='file']").each(function () {
-			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', false); }
-		});
-
 		// Show loading indicator
 		this.setState({
 			loading: true,
 		});
 
-		var object = {};
-		formData.forEach(function (value, key) {
-			object[key] = value;
-		});
-		console.log(object);
+		const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
 		xhr({
-			url: `/api/applications/${object._id}?entity=work&action=moderate`,
+			url: `/api/applications/${id}?entity=work&action=moderate`,
 			method: 'post',
 		}, (err, resp, body) => {
 			if (err) {
