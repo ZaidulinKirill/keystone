@@ -365,7 +365,7 @@ var EditForm = React.createClass({
 		return (
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
-					{!this.props.list.noedit && (!user || !user.isAuthor) && (
+					{!this.props.list.noedit && (user && user.isAuthor) && (
 						<LoadingButton
 							color="primary"
 							disabled={loading}
