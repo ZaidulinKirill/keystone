@@ -8,6 +8,7 @@ import {
 	Grid,
 	ResponsiveText,
 } from '../../../elemental';
+import xhr from 'xhr';
 
 import { Fields } from 'FieldTypes';
 import { fade } from '../../../../utils/color';
@@ -177,6 +178,59 @@ var EditForm = React.createClass({
 			}
 		});
 	},
+	submitForModeration (user) {
+		const { data, list } = this.props;
+		const editForm = this.refs.editForm;
+
+		// Fix for Safari where XHR form submission fails when input[type=file] is empty
+		// https://stackoverflow.com/questions/49614091/safari-11-1-ajax-xhr-form-submission-fails-when-inputtype-file-is-empty
+		$(editForm).find("input[type='file']").each(function () {
+			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', true); }
+		});
+
+		const formData = new FormData(editForm);
+
+
+		$(editForm).find("input[type='file']").each(function () {
+			if ($(this).get(0).files.length === 0) { $(this).prop('disabled', false); }
+		});
+
+		// Show loading indicator
+		this.setState({
+			loading: true,
+		});
+
+		var object = {};
+		formData.forEach(function (value, key) {
+			object[key] = value;
+		});
+		console.log(object);
+
+		xhr({
+			url: `/api/applications/${object._id}?entity=work&action=moderate`,
+			method: 'post',
+		}, (err, resp, body) => {
+			if (err) {
+				this.setState({
+					alerts: {
+						error: err,
+					},
+				});
+				return;
+			}
+			try {
+				window.location = '/keystone/work-applications';
+
+			} catch (e) {
+				this.setState({
+					alerts: {
+						error: e,
+					},
+				});
+				return;
+			}
+		});
+	},
 	renderKeyOrId () {
 		var className = 'EditForm__key-or-id';
 		var list = this.props.list;
@@ -305,11 +359,23 @@ var EditForm = React.createClass({
 		const { loading } = this.state;
 		const loadingButtonText = loading ? 'Saving' : 'Save';
 
+
 		// Padding must be applied inline so the FooterBar can determine its
 		// innerHeight at runtime. Aphrodite's styling comes later...
 		return (
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
+					{!this.props.list.noedit && (!user || !user.isAuthor) && (
+						<LoadingButton
+							color="primary"
+							disabled={loading}
+							loading={loading}
+							onClick={this.submitForModeration(user)}
+							data-button="update"
+						>
+							Submit for moderation
+						</LoadingButton>
+					)}
 					{!this.props.list.noedit && (
 						<LoadingButton
 							color="primary"
