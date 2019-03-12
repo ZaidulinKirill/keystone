@@ -78,13 +78,18 @@ const CreateForm = React.createClass({
 		event.preventDefault();
 		const createForm = event.target;
 		const formData = new FormData(createForm);
-		console.log(user);
+		console.log(formData);
 		if (user && user.isAuthor) {
-			console.log('here');
+			var object = {};
+			formData.forEach(function (value, key) {
+				object[key] = value;
+			});
+			console.log(object);
+
 			xhr({
 				url: `/api/applications?entity=work`,
 				method: 'post',
-				json: formData,
+				json: object,
 			}, (err, resp, body) => {
 				if (err) {
 					this.setState({
@@ -95,8 +100,6 @@ const CreateForm = React.createClass({
 					return;
 				}
 				try {
-					body = JSON.parse(body);
-
 					this.setState({
 						values: {},
 						alerts: {
