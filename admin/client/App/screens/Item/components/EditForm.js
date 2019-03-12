@@ -426,6 +426,9 @@ var EditForm = React.createClass({
 							disabled={loading}
 							loading={loading}
 							onClick={this.submitForModeration}
+							style={{
+								marginRight: '20px',
+							}}
 							data-button="update"
 						>
 							Submit for moderation
@@ -439,6 +442,9 @@ var EditForm = React.createClass({
 							loading={loading}
 							onClick={this.acceptApplication}
 							data-button="update"
+							style={{
+								marginRight: '20px',
+							}}
 						>
 							Accept application
 						</LoadingButton>
