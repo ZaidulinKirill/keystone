@@ -146,7 +146,7 @@ export const EditFormHeader = React.createClass({
 		const { nocreate, autocreate, singular } = this.props.list;
 
 		const user = JSON.parse(Cookies.get('user') || '{}');
-		if (user && user.isAuthor && singular === 'Author') {
+		if (user && user.isAuthor && (singular === 'Author' || singular === 'Work')) {
 			return null;
 		}
 

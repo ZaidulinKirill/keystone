@@ -187,10 +187,10 @@ const CreateForm = React.createClass({
 			// If there's something weird passed in as field type, render the
 			// invalid field type component
 
-			if (user && user.isAuthor && field.path !== 'name' && field.path !== 'image'
+			/* if (user && user.isAuthor && field.path !== 'name' && field.path !== 'image'
 			&& field.path !== 'fragments') {
 				return null;
-			}
+			}*/
 
 			if (typeof Fields[field.type] !== 'function') {
 				form.push(React.createElement(InvalidFieldType, { type: field.type, path: field.path, key: field.path }));

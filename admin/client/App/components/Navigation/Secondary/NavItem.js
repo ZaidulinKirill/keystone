@@ -18,7 +18,7 @@ const SecondaryNavItem = React.createClass({
 	},
 	render () {
 		const user = JSON.parse(Cookies.get('user') || '{}');
-		if (user && user.isAuthor && this.props.path !== 'works') {
+		if (user && user.isAuthor && this.props.path !== 'work-applications') {
 			return null;
 		}
 
