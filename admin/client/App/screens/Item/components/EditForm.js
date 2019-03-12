@@ -420,7 +420,7 @@ var EditForm = React.createClass({
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
 					{!this.props.list.noedit && (user && user.isAuthor)
-						&& this.props.list.singular === 'WorkApplication' && (
+						&& this.props.list.singular === 'Work Application' && (
 						<LoadingButton
 							color="primary"
 							disabled={loading}
@@ -432,7 +432,7 @@ var EditForm = React.createClass({
 						</LoadingButton>
 					)}
 					{!this.props.list.noedit && (!user || !user.isAuthor)
-					&& this.props.list.singular === 'WorkApplication' && (
+					&& this.props.list.singular === 'Work Application' && (
 						<LoadingButton
 							color="primary"
 							disabled={loading}
