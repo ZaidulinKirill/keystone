@@ -74,8 +74,8 @@ class ModalDialog extends Component {
 				className={css(classes.container)}
 				key="open"
 				ref="container"
-				onClick={!!backdropClosesModal && this.handleBackdropClick}
-				onTouchEnd={!!backdropClosesModal && this.handleBackdropClick}
+				// onClick={!!backdropClosesModal && this.handleBackdropClick}
+				// onTouchEnd={!!backdropClosesModal && this.handleBackdropClick}
 			>
 				<div className={css(classes.dialog)} style={{ width }} data-screen-id="modal-dialog">
 					{children}
