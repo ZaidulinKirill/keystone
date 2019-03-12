@@ -8,6 +8,7 @@ import Popout from '../../../../shared/Popout';
 import PopoutList from '../../../../shared/Popout/PopoutList';
 import { FormInput } from '../../../../elemental';
 import ListHeaderButton from '../ListHeaderButton';
+import Cookies from 'js-cookie';
 
 import { setFilter } from '../../actions';
 
@@ -147,15 +148,17 @@ var ListFiltersAdd = React.createClass({
 			'Popout__scrollable-area': !selectedField,
 		});
 
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<div>
-				<ListHeaderButton
+				{!user || !user.isAuthor ? <ListHeaderButton
 					active={isOpen}
 					glyph="eye"
 					id="listHeaderFilterButton"
 					label="Filter"
 					onClick={isOpen ? this.closePopout : this.openPopout}
-				/>
+				/> : null}
 				<Popout isOpen={isOpen} onCancel={this.closePopout} relativeToID="listHeaderFilterButton">
 					<Popout.Header
 						leftAction={selectedField ? this.navigateBack : null}

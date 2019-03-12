@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import Cookies from 'js-cookie';
 
 const SecondaryNavItem = React.createClass({
 	displayName: 'SecondaryNavItem',
@@ -16,6 +17,11 @@ const SecondaryNavItem = React.createClass({
 		title: React.PropTypes.string,
 	},
 	render () {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+		if (user && user.isAuthor && this.props.path !== 'works') {
+			return null;
+		}
+
 		return (
 			<li className={this.props.className} data-list-path={this.props.path}>
 				<Link

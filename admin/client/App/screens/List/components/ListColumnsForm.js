@@ -88,15 +88,18 @@ var ListColumnsForm = React.createClass({
 			marginBottom: '1em',
 			paddingBottom: '1em',
 		};
+
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<div>
-				<ListHeaderButton
+				{!user || user.isAuthor ? <ListHeaderButton
 					active={this.state.isOpen}
 					id="listHeaderColumnButton"
 					glyph="list-unordered"
 					label="Columns"
 					onClick={() => this.togglePopout(!this.state.isOpen)}
-				/>
+				/> : null}
 				<Popout isOpen={this.state.isOpen} onCancel={() => this.togglePopout(false)} relativeToID="listHeaderColumnButton">
 					<Popout.Header title="Columns" />
 					<Popout.Body scrollable>

@@ -5,6 +5,7 @@ import vkey from 'vkey';
 import Kbd from '../../../shared/Kbd';
 import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
+import Cookies from 'js-cookie';
 
 var ListSort = React.createClass({
 	displayName: 'ListSort',
@@ -97,16 +98,25 @@ var ListSort = React.createClass({
 		const activeSortPath = this.props.activeSort.paths[0];
 		const formFieldStyles = { borderBottom: '1px dashed rgba(0,0,0,0.1)', paddingBottom: '1em' };
 
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		return (
 			<span>
 				{activeSortPath && (
 					<span>
 						<span style={{ color: '#999' }}> sorted by </span>
-						<a id="listHeaderSortButton" href="javascript:;" onClick={this.openPopout}>
+						{!user || user.isAuthor
+						? <a id="listHeaderSortButton" href="javascript:;" onClick={this.openPopout}>
 							{activeSortPath.label.toLowerCase()}
 							{activeSortPath.invert ? ' (descending)' : ''}
 							<span className="disclosure-arrow" />
 						</a>
+						: <a id="listHeaderSortButton" href="javascript:;" onClick={this.openPopout}
+							style={{ pointerEvents: 'none' }}>
+							{activeSortPath.label.toLowerCase()}
+							{activeSortPath.invert ? ' (descending)' : ''}
+							<span className="disclosure-arrow" />
+						</a>}
 					</span>
 				)}
 				<Popout isOpen={this.state.popoutIsOpen} onCancel={this.closePopout} relativeToID="listHeaderSortButton">
