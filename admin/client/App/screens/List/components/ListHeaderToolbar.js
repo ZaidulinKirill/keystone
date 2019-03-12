@@ -6,6 +6,7 @@ import {
 	ResponsiveText,
 } from '../../../elemental';
 import theme from '../../../../theme';
+import Cookies from 'js-cookie';
 
 import ListColumnsForm from './ListColumnsForm';
 import ListDownloadForm from './ListDownloadForm';
@@ -24,6 +25,11 @@ function ButtonDivider ({ style, ...props }) {
 };
 
 function CreateButton ({ listName, onClick, ...props }) {
+	const user = JSON.parse(Cookies.get('user') || '{}');
+	if (user && user.isAuthor && listName !== 'Work Application') {
+		return null;
+	}
+
 	return (
 		<GlyphButton
 			block
