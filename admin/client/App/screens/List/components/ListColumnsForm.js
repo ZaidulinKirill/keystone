@@ -93,7 +93,7 @@ var ListColumnsForm = React.createClass({
 
 		return (
 			<div>
-				{!user || user.isAuthor ? <ListHeaderButton
+				{!user || !user.isAuthor ? <ListHeaderButton
 					active={this.state.isOpen}
 					id="listHeaderColumnButton"
 					glyph="list-unordered"

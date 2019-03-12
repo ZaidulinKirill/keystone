@@ -105,7 +105,7 @@ var ListSort = React.createClass({
 				{activeSortPath && (
 					<span>
 						<span style={{ color: '#999' }}> sorted by </span>
-						{!user || user.isAuthor
+						{!user || !user.isAuthor
 						? <a id="listHeaderSortButton" href="javascript:;" onClick={this.openPopout}>
 							{activeSortPath.label.toLowerCase()}
 							{activeSortPath.invert ? ' (descending)' : ''}

@@ -10,6 +10,7 @@ import AlertMessages from './AlertMessages';
 import { Fields } from 'FieldTypes';
 import InvalidFieldType from './InvalidFieldType';
 import { Button, Form, Modal } from '../elemental';
+import Cookies from 'js-cookie';
 
 const CreateForm = React.createClass({
 	displayName: 'CreateForm',
@@ -111,6 +112,8 @@ const CreateForm = React.createClass({
 	// Render the form itself
 	renderForm () {
 		if (!this.props.isOpen) return;
+
+		const user = JSON.parse(Cookies.get('user') || '{}');
 
 		var form = [];
 		var list = this.props.list;
