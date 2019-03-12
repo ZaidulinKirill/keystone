@@ -47,10 +47,10 @@ export const EditFormHeader = React.createClass({
 		);
 	},
 	renderDrilldownItems () {
-		const user = JSON.parse(Cookies.get('user') || '{}');
-		if (user && user.isAuthor) {
-			return null;
-		}
+		// const user = JSON.parse(Cookies.get('user') || '{}');
+		// if (user && user.isAuthor) {
+		// 	return null;
+		// }
 
 		const { data, list } = this.props;
 		const items = data.drilldown ? data.drilldown.items : [];
