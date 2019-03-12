@@ -7,7 +7,6 @@ import React from 'react';
 // import { findDOMNode } from 'react-dom'; // TODO re-implement focus when ready
 import numeral from 'numeral';
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
 
 import {
 	BlankState,
@@ -513,11 +512,11 @@ const ListView = React.createClass({
 		);
 	},
 	render () {
-		const user = JSON.parse(Cookies.get('user') || '{}');
-		console.log(JSON.stringify(this.props.currentList.id));
-		if (user && user.isAuthor && this.props.currentList && this.props.currentList.id !== 'works') {
-			window.location = `/keystone/authors/${user.author}`;
-		}
+		// const user = JSON.parse(Cookies.get('user') || '{}');
+		// console.log(JSON.stringify(this.props.currentList.id));
+		// if (user && user.isAuthor && this.props.currentList && this.props.currentList.id !== 'works') {
+		// 	window.location = `/keystone/authors/${user.author}`;
+		// }
 
 		if (!this.props.ready) {
 			return (
