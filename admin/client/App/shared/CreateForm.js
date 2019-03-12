@@ -11,6 +11,7 @@ import { Fields } from 'FieldTypes';
 import InvalidFieldType from './InvalidFieldType';
 import { Button, Form, Modal } from '../elemental';
 import Cookies from 'js-cookie';
+import xhr from 'xhr';
 
 const CreateForm = React.createClass({
 	displayName: 'CreateForm',
@@ -72,9 +73,51 @@ const CreateForm = React.createClass({
 	},
 	// Create a new item when the form is submitted
 	submitForm (event) {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		event.preventDefault();
 		const createForm = event.target;
 		const formData = new FormData(createForm);
+
+		if (user && user.isAuthor) {
+			xhr({
+				url: `/api/applications?entity=work`,
+				method: 'post',
+				json: formData,
+			}, (err, resp, body) => {
+				if (err) {
+					this.setState({
+						alerts: {
+							error: err,
+						},
+					});
+					return;
+				}
+				try {
+					body = JSON.parse(body);
+
+					this.setState({
+						values: {},
+						alerts: {
+							success: {
+								success: 'Item created. You will be notified by email after moderation',
+							},
+						},
+					});
+
+				} catch (e) {
+					this.setState({
+						alerts: {
+							error: e,
+						},
+					});
+					return;
+				}
+			});
+
+			return;
+		}
+
 		this.props.list.createItem(formData, (err, data) => {
 			if (data) {
 				if (this.props.onCreate) {
