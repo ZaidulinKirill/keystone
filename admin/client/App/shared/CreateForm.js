@@ -78,49 +78,49 @@ const CreateForm = React.createClass({
 		event.preventDefault();
 		const createForm = event.target;
 		const formData = new FormData(createForm);
-		console.log(formData);
-		if (user && user.isAuthor) {
-			var object = {};
-			formData.forEach(function (value, key) {
-				object[key] = value;
-			});
-			console.log(object);
+		// console.log(formData);
+		// if (user && user.isAuthor) {
+		// 	var object = {};
+		// 	formData.forEach(function (value, key) {
+		// 		object[key] = value;
+		// 	});
+		// 	console.log(object);
 
-			xhr({
-				url: `/api/applications?entity=work`,
-				method: 'post',
-				json: object,
-			}, (err, resp, body) => {
-				if (err) {
-					this.setState({
-						alerts: {
-							error: err,
-						},
-					});
-					return;
-				}
-				try {
-					this.setState({
-						values: {},
-						alerts: {
-							success: {
-								success: 'Item created. You will be notified by email after moderation',
-							},
-						},
-					});
+		// 	xhr({
+		// 		url: `/api/applications?entity=work`,
+		// 		method: 'post',
+		// 		json: object,
+		// 	}, (err, resp, body) => {
+		// 		if (err) {
+		// 			this.setState({
+		// 				alerts: {
+		// 					error: err,
+		// 				},
+		// 			});
+		// 			return;
+		// 		}
+		// 		try {
+		// 			this.setState({
+		// 				values: {},
+		// 				alerts: {
+		// 					success: {
+		// 						success: 'Item created. You will be notified by email after moderation',
+		// 					},
+		// 				},
+		// 			});
 
-				} catch (e) {
-					this.setState({
-						alerts: {
-							error: e,
-						},
-					});
-					return;
-				}
-			});
+		// 		} catch (e) {
+		// 			this.setState({
+		// 				alerts: {
+		// 					error: e,
+		// 				},
+		// 			});
+		// 			return;
+		// 		}
+		// 	});
 
-			return;
-		}
+		// 	return;
+		// }
 
 		this.props.list.createItem(formData, (err, data) => {
 			if (data) {
