@@ -75,7 +75,6 @@ const MobileNavigation = React.createClass({
 
 		return this.props.sections
 		.filter(section => {
-			console.log(section);
 			return !user || !user.isAuthor || (section.label === 'Works / Работы' || section.label === 'Authors / Авторы'
 			|| (section.lists && section.lists.length && section.lists[0].key === 'WorkApplication'));
 		})
