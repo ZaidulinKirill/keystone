@@ -183,7 +183,7 @@ var SigninView = React.createClass({
 								/>
 							)}
 							<div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-								Not registered yet? Sign up <a href="/keystone/signin?register=true">here</a>!
+								Not registered yet? Sign up <a href="/keystone/signin?register=true"> here</a>!
 							</div>
 						</div>
 					</div>

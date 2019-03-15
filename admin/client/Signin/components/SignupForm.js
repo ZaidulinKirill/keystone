@@ -28,12 +28,12 @@ const SignupForm = ({
 				fullscreen
 			/>
 			<div style={{ marginBottom: '30px' }}>
-				<h3 style={{ marginBottom: '10px' }}>Для художников:</h3>
-				<p style={{ marginTop: '0px', textIndent: '15px' }}>Вы можете создать свою персональную страницу на сайте academart.com. Для этого необходимо:
+				<h3 style={{ marginBottom: '10px', marginTop: '10px', textAlign: 'center' }}>Для художников:</h3>
+				<p style={{ marginTop: '0px', textIndent: '15px', textAlign: 'justify' }}>Вы можете создать свою персональную страницу на сайте academart.com. Для этого необходимо:
 Учиться или закончить ИЖСА им. И. Е. Репина или СПГАХЛ им Б. В. Иогансона. Иметь не менее 10 творческих работ за последние 5 лет. </p>
 
-				<h3 style={{ marginBottom: '10px' }}>For guests of academart.com:</h3>
-				<p style={{ marginTop: '0px', textIndent: '15px' }}>You can create your personal page on the online artists database and gallery academart.com:
+				<h3 style={{ marginBottom: '10px', marginTop: '25px', textAlign: 'center' }}>For guests of academart.com:</h3>
+				<p style={{ marginTop: '0px', textIndent: '15px', textAlign: 'justify' }}>You can create your personal page on the online artists database and gallery academart.com:
 If you have been creative for at least 5 years. Have at least 10 creative works. Graduated from a secondary or higher art institution.</p>
 			</div>
 			<div className="">
