@@ -7,6 +7,7 @@ import React from 'react';
 // import { findDOMNode } from 'react-dom'; // TODO re-implement focus when ready
 import numeral from 'numeral';
 import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
 
 import {
 	BlankState,
@@ -410,12 +411,18 @@ const ListView = React.createClass({
 			? this.createAutocreate
 			: this.openCreateModal;
 
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
 		// display the button if create allowed
-		const button = !currentList.nocreate ? (
+		let button = !currentList.nocreate ? (
 			<GlyphButton color="success" glyph="plus" position="left" onClick={onClick} data-e2e-list-create-button="no-results">
 				Create {currentList.singular}
 			</GlyphButton>
 		) : null;
+
+		if (user && user.isAuthor && currentList.singular === 'Work') {
+			button = null;
+		}
 
 		return (
 			<Container>
