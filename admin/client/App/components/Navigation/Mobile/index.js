@@ -74,7 +74,8 @@ const MobileNavigation = React.createClass({
 		const user = JSON.parse(Cookies.get('user') || '{}');
 
 		return this.props.sections
-		.filter(section => !user || !user.isAuthor || (section.label === 'Works' || section.label === 'Authors'))
+		.filter(section => !user || !user.isAuthor || (section.label === 'Works' || section.label === 'Authors'
+			|| section.label === 'Work Application'))
 		.map((section) => {
 			// Get the link and the classname
 			const href = section.lists[0].external ? section.lists[0].path : `${Keystone.adminPath}/${section.lists[0].path}`;
