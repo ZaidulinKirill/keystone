@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Transition from 'react-addons-css-transition-group';
+import Cookies from 'js-cookie';
 
 import MobileSectionItem from './SectionItem';
 
@@ -70,7 +71,11 @@ const MobileNavigation = React.createClass({
 	renderNavigation () {
 		if (!this.props.sections || !this.props.sections.length) return null;
 
-		return this.props.sections.map((section) => {
+		const user = JSON.parse(Cookies.get('user') || '{}');
+
+		return this.props.sections
+		.filter(section => !user || !user.isAuthor || (section.label === 'Works' || section.label !== 'Authors'))
+		.map((section) => {
 			// Get the link and the classname
 			const href = section.lists[0].external ? section.lists[0].path : `${Keystone.adminPath}/${section.lists[0].path}`;
 			const className = (this.props.currentSectionKey && this.props.currentSectionKey === section.key) ? 'MobileNavigation__section is-active' : 'MobileNavigation__section';
