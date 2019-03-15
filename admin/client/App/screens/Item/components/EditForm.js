@@ -347,7 +347,9 @@ var EditForm = React.createClass({
 				}
 
 				if (user && user.isAuthor) {
-					if (this.props.list.key === 'Author' && props.key !== 'description') {
+					if (this.props.list.key === 'Author' && props.key !== 'description'
+					&& props.key !== 'name' && props.key !== 'slug' && props.key !== 'useGoldenBorder'
+					&& props.key !== 'images') {
 						return null;
 					}
 
