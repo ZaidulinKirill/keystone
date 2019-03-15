@@ -157,7 +157,11 @@ var SigninView = React.createClass({
 					/>
 					<div className={boxClassname}>
 						<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
-						<div className="auth-box__inner">
+						<div className="auth-box__inner" style={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}>
 							<Brand
 								logo={this.props.logo}
 								brand={this.props.brand}
@@ -178,7 +182,7 @@ var SigninView = React.createClass({
 									password={this.state.password}
 								/>
 							)}
-							<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+							<div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
 								Not registered yet? Sign up <a href="/keystone/signin?register=true">here</a>!
 							</div>
 						</div>
