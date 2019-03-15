@@ -19,19 +19,22 @@ const Brand = function (props) {
 		}
 	}
 	return (
-		<div className={props.fullscreen ? '' : 'auth-box__col'}>
+		<div className={props.fullscreen ? '' : 'auth-box__col'} style={{
+			display: 'flex',
+    	flexDirection: 'column',
+		}}>
 			<div className="auth-box__brand" style={{ border: '0px' }}>
 				<a href="/" className="auth-box__brand__logo">
 					<img
 						src={'http://photo.academart.com/images/5c64229e77e9c607d7a77206'}
 						// width={logo.width ? logo.width : null}
-						height="70px"
+						width="70px"
 						marginTop="10px"
 						alt={props.brand}
 					/>
 				</a>
-			</div><br />
-			<a href="/" fontSize="16px">
+			</div>
+			<a href="/" fontSize="16px" style={{ color: 'black' }}>
 				«Academy of Arts» Foundation
 			</a>
 		</div>
