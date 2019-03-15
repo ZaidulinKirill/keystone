@@ -20,7 +20,7 @@ const Brand = function (props) {
 	}
 	return (
 		<div className={props.fullscreen ? '' : 'auth-box__col'}>
-			<div className="auth-box__brand" style={{ border: '0px', backgroundColor: '#323232' }}>
+			<div className="auth-box__brand" style={{ border: '0px' }}>
 				<a href="/" className="auth-box__brand__logo">
 					<img
 						src={'http://photo.academart.com/images/5c64229e77e9c607d7a77206'}
@@ -30,12 +30,10 @@ const Brand = function (props) {
 						alt={props.brand}
 					/>
 				</a>
-				<br />
-				<br />
-				<a href="/" className="auth-box__brand__logo" fontSize="16px">
-					«Academy of Arts» Foundation
-				</a>
-			</div>
+			</div><br />
+			<a href="/" fontSize="16px">
+				«Academy of Arts» Foundation
+			</a>
 		</div>
 	);
 };
