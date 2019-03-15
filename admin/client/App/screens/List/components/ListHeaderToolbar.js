@@ -26,7 +26,7 @@ function ButtonDivider ({ style, ...props }) {
 
 function CreateButton ({ listName, onClick, ...props }) {
 	const user = JSON.parse(Cookies.get('user') || '{}');
-	if (user && user.isAuthor && listName !== 'Work Application') {
+	if (user && user.isAuthor && listName !== 'Work Application / Регистрация работ') {
 		return null;
 	}
 
