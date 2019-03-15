@@ -36,7 +36,7 @@ const Brand = function (props) {
 				</a>
 			</div>
 			<a href="/" fontSize="16px" style={{ color: 'black' }}>
-				«Academy of Arts» Foundation
+				<h3>«Academy of Arts» Foundation</h3>
 			</a>
 		</div>
 	);
