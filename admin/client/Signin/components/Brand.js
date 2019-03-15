@@ -33,7 +33,7 @@ const Brand = function (props) {
 				<br />
 				<br />
 				<a href="/" className="auth-box__brand__logo" fontSize="16px">
-					{props.brand}
+					«Academy of Arts» Foundation
 				</a>
 			</div>
 		</div>
