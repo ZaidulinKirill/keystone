@@ -291,11 +291,11 @@ var EditForm = React.createClass({
 			</div>
 		);
 
-		if (user && user.isAuthor) {
-			return wrapNameField(
-				<h2>{this.props.data.name || '(no name)'}</h2>
-			);
-		}
+		// if (user && user.isAuthor) {
+		// 	return wrapNameField(
+		// 		<h2>{this.props.data.name || '(no name)'}</h2>
+		// 	);
+		// }
 
 		if (nameFieldIsFormHeader) {
 			var nameFieldProps = this.getFieldProps(nameField);
