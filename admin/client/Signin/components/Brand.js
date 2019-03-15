@@ -21,14 +21,15 @@ const Brand = function (props) {
 	return (
 		<div className={props.fullscreen ? '' : 'auth-box__col'} style={{
 			display: 'flex',
-    	flexDirection: 'column',
+			flexDirection: 'column',
+			alignItems: 'center',
 		}}>
 			<div className="auth-box__brand" style={{ border: '0px' }}>
 				<a href="/" className="auth-box__brand__logo">
 					<img
 						src={'http://photo.academart.com/images/5c64229e77e9c607d7a77206'}
 						// width={logo.width ? logo.width : null}
-						width="70px"
+						width="90px"
 						marginTop="10px"
 						alt={props.brand}
 					/>
