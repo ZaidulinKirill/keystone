@@ -178,6 +178,9 @@ var SigninView = React.createClass({
 									password={this.state.password}
 								/>
 							)}
+							<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+								Not registered yet? Sign up <a href="/keystone/signin?register=true">here</a>!
+							</div>
 						</div>
 					</div>
 					<div className="auth-footer">
@@ -209,9 +212,6 @@ var SigninView = React.createClass({
 							isAnimating={this.state.isAnimating}
 							password={this.state.password}
 						/>
-						<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-							Not registered yet? Sign up <a href="/keystone/signin?register=true">here</a>!
-						</div>
 					</div>
 					<div className="auth-footer">
 						<span>Powered by </span>
