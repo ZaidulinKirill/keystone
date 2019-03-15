@@ -77,7 +77,7 @@ const MobileNavigation = React.createClass({
 		.filter(section => {
 			console.log(section);
 			return !user || !user.isAuthor || (section.label === 'Works / Работы' || section.label === 'Authors / Авторы'
-			|| section.label === 'Work Application / Регистрация работ');
+			|| (section.lists && section.lists.length && section.lists[0].key === 'WorkApplication'));
 		})
 		.map((section) => {
 			// Get the link and the classname
