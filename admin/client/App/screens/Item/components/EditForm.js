@@ -393,7 +393,7 @@ var EditForm = React.createClass({
 							}}
 							data-button="update"
 						>
-							Submit for moderation
+							Submit for moderation/Отправить на модерацию
 						</LoadingButton>
 					)}
 					{!this.props.list.noedit && (!user || !user.isAuthor)
@@ -408,7 +408,7 @@ var EditForm = React.createClass({
 								marginRight: '20px',
 							}}
 						>
-							Accept application
+							Подтвердить заявку
 						</LoadingButton>
 					)}
 					{!this.props.list.noedit && (
