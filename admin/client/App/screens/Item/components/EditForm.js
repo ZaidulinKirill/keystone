@@ -377,11 +377,12 @@ var EditForm = React.createClass({
 		console.log(this.props);
 		// Padding must be applied inline so the FooterBar can determine its
 		// innerHeight at runtime. Aphrodite's styling comes later...
+		console.log(this.props.list.singular);
 		return (
 			<FooterBar style={styles.footerbar}>
 				<div style={styles.footerbarInner}>
 					{!this.props.list.noedit && (user && user.isAuthor)
-						&& this.props.list.singular === 'Work Application / Регистрация работ' && (
+						&& this.props.list.singular === 'Work Application' && (
 						<LoadingButton
 							color="primary"
 							disabled={loading}
