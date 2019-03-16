@@ -25,14 +25,10 @@ function ButtonDivider ({ style, ...props }) {
 };
 
 function CreateButton ({ listName, onClick, ...props }) {
-	console.log(listName);
-
 	const user = JSON.parse(Cookies.get('user') || '{}');
-	if (user && user.isAuthor && listName !== 'Work Application / Регистрация работ') {
+	if (user && user.isAuthor && listName !== 'Work Application') {
 		return null;
 	}
-
-	console.log('e' + listName);
 
 	return (
 		<GlyphButton
