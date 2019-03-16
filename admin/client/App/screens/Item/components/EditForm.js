@@ -397,7 +397,7 @@ var EditForm = React.createClass({
 						</LoadingButton>
 					)}
 					{!this.props.list.noedit && (!user || !user.isAuthor)
-					&& this.props.list.singular === 'Work Application / Регистрация работ' && (
+					&& this.props.list.singular === 'Work Application' && (
 						<LoadingButton
 							color="primary"
 							disabled={loading}
