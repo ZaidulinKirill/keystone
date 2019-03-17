@@ -520,6 +520,7 @@ var EditForm = React.createClass({
 				<Grid.Row>
 					<Grid.Col large="three-quarters">
 						<Form layout="horizontal" component="div">
+							<label htmlFor="name" className="css-100z94z">Name/Название</label>
 							{this.renderNameField(user)}
 							{this.renderKeyOrId(user)}
 							{this.renderFormElements(user)}
