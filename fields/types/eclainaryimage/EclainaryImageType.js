@@ -10,7 +10,6 @@ var util = require('util');
 var utils = require('keystone-utils');
 var eclainaryTransform = require('../../../lib/eclainaryTransform');
 const fs = require('fs');
-const FormData = require('form-data');
 const fetch = require('node-fetch');
 
 
@@ -370,7 +369,7 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename: uploadedFile.originalname,
 			});
 
-			console.log('here', formData)
+			console.log('here', formData, uploadedFile.originalname)
 
 			fetch(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
@@ -384,7 +383,7 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 					return callback();
 				})
 				.catch(function (err) {
-					console.error(err);
+					console.error('error', err);
 					return callback(err);
 				});
 		});
