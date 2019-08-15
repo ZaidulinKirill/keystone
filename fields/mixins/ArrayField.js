@@ -79,7 +79,7 @@ module.exports = {
 		return (
 			<div>
 				{this.state.values.map(this.renderItem)}
-				<Button ref="button" onClick={this.addItem}>Add item</Button>
+				<Button ref="button" onClick={this.addItem}>Добавить</Button>
 			</div>
 		);
 	},

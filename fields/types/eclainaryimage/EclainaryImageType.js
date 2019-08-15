@@ -370,18 +370,18 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename: uploadedFile.originalname,
 			});
 
-			console.log('here', formData)
+			console.log('here', formData);
 
 			axios.post(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`, formData, {
 				headers: formData.getHeaders(),
 			}).then(result => {
-				console.log('response', result.data)
+				console.log('response', result.data);
 				item.set(field.path, result.data);
 				return callback();
 			}).catch(err => {
 				console.error('error', err);
 				return callback(err);
-			})
+			});
 		});
 
 		return;
