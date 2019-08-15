@@ -116,7 +116,7 @@ eclainaryimages.prototype.addToSchema = function (schema) {
 	});
 
 	var src = function (img) {
-		return `http://eclainary.peppyhost.site/images/${img.public_id}`;
+		return `${process.env.ECLAINARY_URL}/images/${img.public_id}`;
 	};
 
 	ImageSchema.method('src', function (options) {
