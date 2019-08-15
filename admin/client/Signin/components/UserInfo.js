@@ -21,7 +21,7 @@ const UserInfo = ({
 			<p>You're already signed in.</p>
 			{adminButton}
 			<Button href={signoutPath} variant="link" color="cancel">
-				Sign Out
+				Выйти
 			</Button>
 		</div>
 	);

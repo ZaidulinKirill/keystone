@@ -157,13 +157,13 @@ const ListView = React.createClass({
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
-				label: 'Delete',
+				label: 'Удалить',
 				body: (
 					<div>
-						Are you sure you want to delete {itemCount}?
+						Вы уверены, что хотите удалить {itemCount}?
 						<br />
 						<br />
-						This cannot be undone.
+						Это действие невозмодно отменить
 					</div>
 				),
 				onConfirmation: () => {
@@ -346,13 +346,13 @@ const ListView = React.createClass({
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
-				label: 'Delete',
+				label: 'Удалить',
 				body: (
 					<div>
-						Are you sure you want to delete <strong>{item.name}</strong>?
+						Вы уверены, что хотите удалить <strong>{item.name}</strong>?
 						<br />
 						<br />
-						This cannot be undone.
+						Это действие невозможно удалить.
 					</div>
 				),
 				onConfirmation: () => {
@@ -413,7 +413,7 @@ const ListView = React.createClass({
 		// display the button if create allowed
 		const button = !currentList.nocreate ? (
 			<GlyphButton color="success" glyph="plus" position="left" onClick={onClick} data-e2e-list-create-button="no-results">
-				Create {currentList.singular}
+				Создать {currentList.singular}
 			</GlyphButton>
 		) : null;
 
@@ -422,11 +422,11 @@ const ListView = React.createClass({
 				{(this.props.error) ? (
 					<FlashMessages
 						messages={{ error: [{
-							title: "There is a problem with the network, we're trying to reconnect...",
+							title: "Проблема с вашей сейтью, мы пробуем переподключиться...",
 						}] }}
 					/>
 				) : null}
-				<BlankState heading={`No ${this.props.currentList.plural.toLowerCase()} found...`} style={{ marginTop: 40 }}>
+				<BlankState heading={`${this.props.currentList.plural.toLowerCase()} не найдены...`} style={{ marginTop: 40 }}>
 					{button}
 				</BlankState>
 			</Container>
@@ -458,7 +458,7 @@ const ListView = React.createClass({
 					{(this.props.error) ? (
 						<FlashMessages
 							messages={{ error: [{
-								title: "There is a problem with the network, we're trying to reconnect..",
+								title: "Проблема с вашей сейтью, мы пробуем переподключиться...",
 							}] }}
 						/>
 					) : null}

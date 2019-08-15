@@ -25,7 +25,7 @@ var Footer = React.createClass({
 
 		return (
 			<span>
-				<span> Signed in as </span>
+				<span> Вход выполнен под </span>
 				<a href={`${Keystone.adminPath}/${User.path}/${user.id}`} tabIndex="-1" className={css(classes.link)}>
 					{user.name}
 				</a>
@@ -46,7 +46,7 @@ var Footer = React.createClass({
 					>
 						{brand + (appversion ? (' ' + appversion) : '')}
 					</a>
-					<span> powered by </span>
+					<span> основан на </span>
 					<a
 						href="http://keystonejs.com"
 						target="_blank"

@@ -162,7 +162,7 @@ var EditForm = React.createClass({
 				this.setState({
 					alerts: {
 						success: {
-							success: 'Your changes have been saved successfully',
+							success: 'Выши изменения были сохранены успешно',
 						},
 					},
 					lastValues: this.state.values,
@@ -234,7 +234,7 @@ var EditForm = React.createClass({
 			);
 		} else {
 			return wrapNameField(
-				<h2>{this.props.data.name || '(no name)'}</h2>
+				<h2>{this.props.data.name || '(без имени)'}</h2>
 			);
 		}
 	},
@@ -277,7 +277,7 @@ var EditForm = React.createClass({
 		}
 
 		const { loading } = this.state;
-		const loadingButtonText = loading ? 'Saving' : 'Save';
+		const loadingButtonText = loading ? 'Сохранение' : 'Сохранено';
 
 		// Padding must be applied inline so the FooterBar can determine its
 		// innerHeight at runtime. Aphrodite's styling comes later...
@@ -299,16 +299,16 @@ var EditForm = React.createClass({
 					{!this.props.list.noedit && (
 						<Button disabled={loading} onClick={this.toggleResetDialog} variant="link" color="cancel" data-button="reset">
 							<ResponsiveText
-								hiddenXS="reset changes"
-								visibleXS="reset"
+								hiddenXS="отменить изменения"
+								visibleXS="отменить"
 							/>
 						</Button>
 					)}
 					{!this.props.list.nodelete && (
 						<Button disabled={loading} onClick={this.toggleDeleteDialog} variant="link" color="delete" style={styles.deleteButton} data-button="delete">
 							<ResponsiveText
-								hiddenXS={`delete ${this.props.list.singular.toLowerCase()}`}
-								visibleXS="delete"
+								hiddenXS={`удалить ${this.props.list.singular.toLowerCase()}`}
+								visibleXS="удалить"
 							/>
 						</Button>
 					)}
@@ -401,23 +401,23 @@ var EditForm = React.createClass({
 				</Grid.Row>
 				{this.renderFooterBar()}
 				<ConfirmationDialog
-					confirmationLabel="Reset"
+					confirmationLabel="Сбросить"
 					isOpen={this.state.resetDialogIsOpen}
 					onCancel={this.toggleResetDialog}
 					onConfirmation={this.handleReset}
 				>
-					<p>Reset your changes to <strong>{this.props.data.name}</strong>?</p>
+					<p>Сбросить изменения <strong>{this.props.data.name}</strong>?</p>
 				</ConfirmationDialog>
 				<ConfirmationDialog
-					confirmationLabel="Delete"
+					confirmationLabel="Удаление"
 					isOpen={this.state.deleteDialogIsOpen}
 					onCancel={this.toggleDeleteDialog}
 					onConfirmation={this.handleDelete}
 				>
-					Are you sure you want to delete <strong>{this.props.data.name}?</strong>
+					Вы уверены, что хотите удалить <strong>{this.props.data.name}?</strong>
 					<br />
 					<br />
-					This cannot be undone.
+					Это действие невозможно отменить.
 				</ConfirmationDialog>
 			</form>
 		);

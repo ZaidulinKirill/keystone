@@ -32,13 +32,13 @@ function CreateButton ({ listName, onClick, ...props }) {
 			glyph="plus"
 			onClick={onClick}
 			position="left"
-			title={`Create ${listName}`}
+			title={`Создать ${listName}`}
 			{...props}
 		>
 			<ResponsiveText
-				visibleSM="Create"
-				visibleMD="Create"
-				visibleLG={`Create ${listName}`}
+				visibleSM="Создать"
+				visibleMD="Создать"
+				visibleLG={`Создать ${listName}`}
 			/>
 		</GlyphButton>
 	);
@@ -113,7 +113,7 @@ function ListHeaderToolbar ({
 								active={expandIsActive}
 								glyph="mirror"
 								onClick={expandOnClick}
-								title="Expand table width"
+								title="Растянуть столбцы на всю длину"
 							/>
 						</ButtonDivider>
 					</Section>

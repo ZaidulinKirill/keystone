@@ -50,8 +50,8 @@ function ListManagement ({
 			<Button
 				active={allVisibleButtonIsActive}
 				onClick={() => handleSelect('all')}
-				title="Select all rows (including those not visible)">
-				{selectAllItemsLoading ? <Spinner/> : 'All'} <small style={buttonNoteStyles}>({itemCount})</small>
+				title="Выбрать все строки (включая те, которые не видно)">
+				{selectAllItemsLoading ? <Spinner/> : 'Всё'} <small style={buttonNoteStyles}>({itemCount})</small>
 			</Button>
 		</Section>
 	);
@@ -61,13 +61,13 @@ function ListManagement ({
 			<Group contiguous>
 				{selectAllButton}
 				<Section>
-					<Button active={pageVisibleButtonIsActive} onClick={() => handleSelect('visible')} title="Select all rows">
-						{itemCount > itemsPerPage ? 'Page ' : 'All '}
+					<Button active={pageVisibleButtonIsActive} onClick={() => handleSelect('visible')} title="Выбрать все строки">
+						{itemCount > itemsPerPage ? 'Страница ' : 'Всё '}
 						<small style={buttonNoteStyles}>({itemCount > itemsPerPage ? itemsPerPage : itemCount})</small>
 					</Button>
 				</Section>
 				<Section>
-					<Button active={noneButtonIsActive} onClick={() => handleSelect('none')} title="Deselect all rows">None</Button>
+					<Button active={noneButtonIsActive} onClick={() => handleSelect('none')} title="Снять выделение">Ничего</Button>
 				</Section>
 			</Group>
 		</Section>
@@ -77,7 +77,7 @@ function ListManagement ({
 	const selectedCountText = isOpen ? (
 		<Section>
 			<span style={{ color: '#666', display: 'inline-block', lineHeight: '2.4em', margin: 1 }}>
-				{checkedItemCount} selected
+				{checkedItemCount} выбраны
 			</span>
 		</Section>
 	) : null;
@@ -88,7 +88,7 @@ function ListManagement ({
 			<Group style={{ float: 'left', marginRight: '.75em', marginBottom: 0 }}>
 				<Section>
 					<Button active={isOpen} onClick={() => handleToggle(!isOpen)}>
-						Manage
+						Управление
 					</Button>
 				</Section>
 				{selectButtons}

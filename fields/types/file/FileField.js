@@ -164,15 +164,15 @@ module.exports = Field.create({
 		if (this.state.removeExisting) {
 			return (
 				<Button variant="link" onClick={this.undoRemove}>
-					Undo Remove
+					Отменить удаление
 				</Button>
 			);
 		} else {
 			var clearText;
 			if (this.state.userSelectedFile) {
-				clearText = 'Cancel Upload';
+				clearText = 'Отменить загрузку';
 			} else {
-				clearText = (this.props.autoCleanup ? 'Delete File' : 'Remove File');
+				clearText = (this.props.autoCleanup ? 'Удалить файл' : 'Remove File');
 			}
 			return (
 				<Button variant="link" color="cancel" onClick={this.handleRemove}>

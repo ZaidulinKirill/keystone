@@ -181,10 +181,10 @@ class SelectFilter extends Component {
 				</FormField>
 				<div style={fieldStyles}>
 					<Button size="xsmall" onClick={this.toggleAllOptions} style={{ padding: 0, width: 50 }}>
-						{indeterminate ? 'All' : 'None'}
+						{indeterminate ? 'Всё' : 'Ничего'}
 					</Button>
 					<FormNote style={{ margin: 0 }}>
-						Hold <Kbd>{metaKeyLabel}</Kbd> to select multiple options
+						Нажмите <Kbd>{metaKeyLabel}</Kbd> чтобы выбрать несколько вариантов
 					</FormNote>
 				</div>
 				{this.renderOptions()}
