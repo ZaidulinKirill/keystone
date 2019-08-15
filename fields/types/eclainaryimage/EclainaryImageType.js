@@ -12,7 +12,7 @@ var eclainaryTransform = require('../../../lib/eclainaryTransform');
 const fs = require('fs');
 const FormData = require('form-data');
 const fetch = require('node-fetch');
-
+const axios = require('axios');
 
 /*
 var ECLAINARY_FIELDS = ['public_id', 'format', 'url', 'width', 'height'];
@@ -372,21 +372,16 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 
 			console.log('here', formData)
 
-			fetch(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`,
-			{ method: 'POST', body: formData })
-				.then(function (res) {
-					console.log(res)
-					return res.json();
-				})
-				.then(function (res) {
-					console.log(res)
-					item.set(field.path, res);
-					return callback();
-				})
-				.catch(function (err) {
-					console.error('error', err);
-					return callback(err);
-				});
+			axios.post(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`, formData, {
+				headers: formData.getHeaders(),
+			}).then(result => {
+				console.log('response', result.data)
+				item.set(field.path, result.data);
+				return callback();
+			}).catch(err => {
+				console.error('error', err);
+				return callback(err);
+			})
 		});
 
 		return;
