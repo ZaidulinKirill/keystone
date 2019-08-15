@@ -153,14 +153,14 @@ var ListFiltersAdd = React.createClass({
 					active={isOpen}
 					glyph="eye"
 					id="listHeaderFilterButton"
-					label="Filter"
+					label="Фильтр"
 					onClick={isOpen ? this.closePopout : this.openPopout}
 				/>
 				<Popout isOpen={isOpen} onCancel={this.closePopout} relativeToID="listHeaderFilterButton">
 					<Popout.Header
 						leftAction={selectedField ? this.navigateBack : null}
 						leftIcon={selectedField ? 'chevron-left' : null}
-						title={selectedField ? selectedField.label : 'Filter'}
+						title={selectedField ? selectedField.label : 'Фильтр'}
 						transitionDirection={selectedField ? 'next' : 'prev'} />
 					<Transition
 						className={popoutPanesClassname}
