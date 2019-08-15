@@ -370,12 +370,16 @@ eclainaryimage.prototype.updateItem = function (item, data, files, callback) {
 				filename: uploadedFile.originalname,
 			});
 
+			console.log('here', formData)
+
 			fetch(`${process.env.ECLAINARY_URL}/images/${process.env.ECLAINARY_TOKEN}`,
 			{ method: 'POST', body: formData })
 				.then(function (res) {
+					console.log(res)
 					return res.json();
 				})
 				.then(function (res) {
+					console.log(res)
 					item.set(field.path, res);
 					return callback();
 				})
