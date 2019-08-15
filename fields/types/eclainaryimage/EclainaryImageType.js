@@ -179,7 +179,6 @@ eclainaryimage.prototype.addToSchema = function (schema) {
 		 * @api public
 		 */
 		upload: function (file, options) {
-			console.log(file);
 			// var promise = new Promise(function (resolve) {
 			// 	eclainary.uploader.upload(file, function (result) {
 			// 		resolve(result);

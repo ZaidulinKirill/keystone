@@ -28,7 +28,6 @@ module.exports = Field.create({
 		getDefaultValue: () => ([]),
 	},
 	getInitialState () {
-		console.log(this.props);
 		return this.buildInitialState(this.props);
 	},
 	componentWillUpdate (nextProps) {
