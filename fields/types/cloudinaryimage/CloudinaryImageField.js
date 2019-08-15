@@ -234,13 +234,13 @@ module.exports = Field.create({
 		if (this.state.userSelectedFile) {
 			return (
 				<FileChangeMessage color="success">
-					Save to Upload
+					Сохраните для загрузки
 				</FileChangeMessage>
 			);
 		} else if (this.state.removeExisting) {
 			return (
 				<FileChangeMessage color="danger">
-					Save to Remove
+					Сохраните для удаления
 				</FileChangeMessage>
 			);
 		} else {
@@ -254,7 +254,7 @@ module.exports = Field.create({
 
 		return this.state.removeExisting ? (
 			<Button variant="link" onClick={this.undoRemove}>
-				Undo Remove
+				Отменить удаления
 			</Button>
 		) : (
 			<Button variant="link" color="cancel" onClick={this.handleRemove}>

@@ -179,7 +179,7 @@ module.exports = Field.create({
 		if (this.state.isCropChanged) {
 			return (
 				<FileChangeMessage color="success">
-					Save to Upload
+					Сохраните для загрузки
 				</FileChangeMessage>
 			);
 		} else {

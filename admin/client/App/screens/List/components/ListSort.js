@@ -101,7 +101,7 @@ var ListSort = React.createClass({
 			<span>
 				{activeSortPath && (
 					<span>
-						<span style={{ color: '#999' }}> sorted by </span>
+						<span style={{ color: '#999' }}> отсортирован по </span>
 						<a id="listHeaderSortButton" href="javascript:;" onClick={this.openPopout}>
 							{activeSortPath.label.toLowerCase()}
 							{activeSortPath.invert ? ' (descending)' : ''}
@@ -110,7 +110,7 @@ var ListSort = React.createClass({
 					</span>
 				)}
 				<Popout isOpen={this.state.popoutIsOpen} onCancel={this.closePopout} relativeToID="listHeaderSortButton">
-					<Popout.Header title="Sort" />
+					<Popout.Header title="Сортировка" />
 
 					<Popout.Body scrollable>
 						<FormField style={formFieldStyles}>
@@ -118,7 +118,7 @@ var ListSort = React.createClass({
 								autoFocus
 								value={this.state.searchString}
 								onChange={this.updateSearch}
-								placeholder="Find a field..."
+								placeholder="Найти поле..."
 							/>
 						</FormField>
 						<PopoutList>
@@ -127,7 +127,7 @@ var ListSort = React.createClass({
 					</Popout.Body>
 
 					<Popout.Footer>
-						<FormNote>Hold <Kbd>alt</Kbd> to toggle ascending/descending</FormNote>
+						<FormNote>Зажмите <Kbd>alt</Kbd> чтобы переключить убывание/возрастание</FormNote>
 					</Popout.Footer>
 				</Popout>
 			</span>

@@ -147,7 +147,7 @@ module.exports = Field.create({
 		if (this.state.userSelectedFile) {
 			return (
 				<FileChangeMessage color="success">
-					Save to Upload
+					Сохраните для загрузки
 				</FileChangeMessage>
 			);
 		} else if (this.state.removeExisting) {
