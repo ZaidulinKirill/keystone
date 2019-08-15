@@ -255,16 +255,16 @@ module.exports = Field.create({
 		// prepare the change message
 		const changeMessage = uploadCount || deleteCount ? (
 			<FileChangeMessage>
-				{uploadCount && deleteCount ? `${uploadCount} added and ${deleteCount} removed` : null}
-				{uploadCount && !deleteCount ? `${uploadCount} image added` : null}
-				{!uploadCount && deleteCount ? `${deleteCount} image removed` : null}
+				{uploadCount && deleteCount ? `${uploadCount} добавлено и ${deleteCount} удалено` : null}
+				{uploadCount && !deleteCount ? `${uploadCount} изображение добавлено` : null}
+				{!uploadCount && deleteCount ? `${deleteCount} изображение удалено` : null}
 			</FileChangeMessage>
 		) : null;
 
 		// prepare the save message
 		const saveMessage = uploadCount || deleteCount ? (
 			<FileChangeMessage color={!deleteCount ? 'success' : 'danger'}>
-				Save to {!deleteCount ? 'Upload' : 'Confirm'}
+				Сохраните для {!deleteCount ? 'Загрузки' : 'Подтверждения'}
 			</FileChangeMessage>
 		) : null;
 
@@ -276,11 +276,11 @@ module.exports = Field.create({
 		return (
 			<div style={toolbarStyles}>
 				<Button onClick={this.triggerFileBrowser} style={uploadButtonStyles} data-e2e-upload-button="true">
-					Upload Images
+					Загрузить изображения
 				</Button>
 				{this.hasFiles() && (
 					<Button variant="link" color="cancel" onClick={this.clearFiles}>
-						Clear selection
+						Снять выделение
 					</Button>
 				)}
 				{changeMessage}
